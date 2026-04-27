@@ -21,8 +21,8 @@ function TaskCard({ task, onUpdateStatus, onViewDetails }) {
     };
 
     return (
-        <div className="bg-neutral-800 rounded-xl p-6 hover:bg-neutral-700/50 transition-colors">
-            <div className="flex justify-between items-start mb-4">
+        <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-6 hover:bg-white/15 transition-all border border-white/20 shadow-xl">
+            <div className="flex justify-between items-start mb-5">
                 <div>
                     <h3 className="text-lg font-semibold text-white">
                         {task.description || task.taskDescription}

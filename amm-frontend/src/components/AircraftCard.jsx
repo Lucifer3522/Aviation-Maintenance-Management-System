@@ -6,8 +6,8 @@ function AircraftCard({ aircraft, onDelete }) {
     const modelPath = aircraft.aircraftModelId?.modelPath || aircraft.modelPath;
 
     return (
-        <div className="bg-neutral-800 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-neutral-700">
-            <div className="w-full h-48 bg-neutral-900 relative">
+        <div className="bg-gradient-to-br from-white/15 to-white/5 rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-white/20 backdrop-blur-[20px]">
+            <div className="w-full h-48 bg-gradient-to-br from-slate-900 to-slate-800 relative">
                 {modelPath ? (
                     <model-viewer
                         src={modelPath}
@@ -19,50 +19,50 @@ function AircraftCard({ aircraft, onDelete }) {
                         field-of-view="30deg"
                     ></model-viewer>
                 ) : (
-                    <div className="flex items-center justify-center h-full text-gray-400 dark:text-gray-600">
+                    <div className="flex items-center justify-center h-full text-white/40">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-16 h-16">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                         </svg>
                     </div>
                 )}
-                <div className="absolute top-3 right-3">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm ${
-                        aircraft.status === 'Active' ? 'bg-green-500/80 text-white' :
-                        aircraft.status === 'Maintenance' ? 'bg-yellow-500/80 text-white' :
-                        'bg-gray-500/80 text-white'
+                <div className="absolute top-4 right-4">
+                    <span className={`px-4 py-2 rounded-full text-xs font-semibold backdrop-blur-[15px] border border-white/30 ${
+                        aircraft.status === 'Active' ? 'bg-green-500/40 text-green-100' :
+                        aircraft.status === 'Maintenance' ? 'bg-yellow-500/40 text-yellow-100' :
+                        'bg-white/20 text-white'
                     }`}>
                         {aircraft.status}
                     </span>
                 </div>
             </div>
 
-            <div className="p-4">
-                <h2 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
+            <div className="p-5">
+                <h2 className="text-lg font-semibold mb-4 text-white">
                     {manufacturer} {model}
                 </h2>
                 
-                <div className="space-y-2 mb-4">
+                <div className="space-y-3 mb-5">
                     <div className="flex justify-between items-center">
-                        <span className="text-gray-600 dark:text-gray-400 text-sm">Registration:</span>
-                        <span className="text-gray-900 dark:text-white font-medium">{aircraft.registration}</span>
+                        <span className="text-white/60 text-sm">Registration:</span>
+                        <span className="text-white font-medium">{aircraft.registration}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                        <span className="text-gray-600 dark:text-gray-400 text-sm">Station:</span>
-                        <span className="text-gray-700 dark:text-gray-300">{aircraft.station}</span>
+                        <span className="text-white/60 text-sm">Station:</span>
+                        <span className="text-white/80">{aircraft.station}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                        <span className="text-gray-600 dark:text-gray-400 text-sm">Flight Hours:</span>
-                        <span className="text-gray-700 dark:text-gray-300">{aircraft.flightHours?.toLocaleString()} hrs</span>
+                        <span className="text-white/60 text-sm">Flight Hours:</span>
+                        <span className="text-white/80">{aircraft.flightHours?.toLocaleString()} hrs</span>
                     </div>
                     <div className="flex justify-between items-center">
-                        <span className="text-gray-600 dark:text-gray-400 text-sm">Cycles:</span>
-                        <span className="text-gray-700 dark:text-gray-300">{aircraft.cycles?.toLocaleString()}</span>
+                        <span className="text-white/60 text-sm">Cycles:</span>
+                        <span className="text-white/80">{aircraft.cycles?.toLocaleString()}</span>
                     </div>
                 </div>
 
                 <div className="flex gap-2">
                     <Link to={`/aircraft/${aircraft._id}`} className="flex-1">
-                        <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 font-medium">
+                        <button className="w-full bg-gradient-to-r from-blue-500/60 to-blue-600/60 text-white px-4 py-2.5 rounded-[1.5rem] hover:from-blue-500/80 hover:to-blue-600/80 transition-all duration-300 font-medium border border-white/20">
                             View Details
                         </button>
                     </Link>
@@ -71,7 +71,7 @@ function AircraftCard({ aircraft, onDelete }) {
                             e.preventDefault();
                             onDelete(aircraft);
                         }}
-                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors duration-300"
+                        className="bg-gradient-to-r from-red-500/60 to-red-600/60 hover:from-red-500/80 hover:to-red-600/80 text-white px-4 py-2.5 rounded-[1.5rem] transition-all duration-300 border border-white/20"
                         title="Delete Aircraft"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">

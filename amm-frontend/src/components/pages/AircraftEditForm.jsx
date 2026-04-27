@@ -14,7 +14,7 @@ function AircraftEditForm({
     };
 
     return (
-        <form onSubmit={handleSubmit} className="bg-neutral-800 rounded-xl p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-7 space-y-6 border border-white/20 shadow-xl">
             <Select
                 label="Aircraft Model"
                 name="aircraftModelId"

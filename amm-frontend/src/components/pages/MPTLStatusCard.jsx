@@ -45,11 +45,11 @@ function MPTLStatusCard({ mptlList }) {
                 const progress = calculateProgress(mptl.tasks);
 
                 return (
-                    <div key={mptl._id} className="bg-neutral-800 rounded-lg p-4 hover:bg-neutral-750 transition">
-                        <div className="flex items-start justify-between mb-3">
+                    <div key={mptl._id} className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-5 hover:bg-white/15 transition border border-white/20 shadow-xl">
+                        <div className="flex items-start justify-between mb-4">
                             <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <h3 className="font-semibold text-lg">{mptl.title}</h3>
+                                <div className="flex items-center gap-3 mb-2">
+                                    <h3 className="font-semibold text-lg text-white">{mptl.title}</h3>
                                     <Badge className={getStatusColor(overallStatus)}>
                                         {overallStatus}
                                     </Badge>

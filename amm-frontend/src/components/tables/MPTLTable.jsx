@@ -11,24 +11,24 @@ function MPTLTable({ mptls, onDelete }) {
     return (
         <div className="overflow-x-auto">
             <table className="w-full">
-                <thead className="bg-neutral-700">
+                <thead className="bg-white/5 border-b border-white/20">
                     <tr>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Task List #</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Aircraft</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Station</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Tasks</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Status</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Created</th>
-                        <th className="px-4 py-3 text-right text-sm font-semibold">Actions</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Task List #</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Aircraft</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Station</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Tasks</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Status</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Created</th>
+                        <th className="px-4 py-3 text-right text-sm font-semibold text-white/80">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-700">
+                <tbody className="divide-y divide-white/20">
                     {mptls.map((mptl) => (
-                        <tr key={mptl._id} className="hover:bg-neutral-700/50 transition">
-                            <td className="px-4 py-3 font-mono text-sm">{mptl.taskListNumber}</td>
-                            <td className="px-4 py-3">{mptl.aircraftId?.registration || 'N/A'}</td>
-                            <td className="px-4 py-3">{mptl.station || 'N/A'}</td>
-                            <td className="px-4 py-3">{mptl.tasks?.length || 0}</td>
+                        <tr key={mptl._id} className="hover:bg-white/5 transition">
+                            <td className="px-4 py-3 font-mono text-sm text-white">{mptl.taskListNumber}</td>
+                            <td className="px-4 py-3 text-white">{mptl.aircraftId?.registration || 'N/A'}</td>
+                            <td className="px-4 py-3 text-white">{mptl.station || 'N/A'}</td>
+                            <td className="px-4 py-3 text-white">{mptl.tasks?.length || 0}</td>
                             <td className="px-4 py-3">
                                 <Badge 
                                     size="sm"

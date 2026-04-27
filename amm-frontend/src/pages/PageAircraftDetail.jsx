@@ -5,6 +5,8 @@ import { aircraftService, mptlService } from "../services";
 import Loading from "../components/Loading";
 import { Button, Card } from "../components/ui";
 import { AircraftInfoCard, MPDTaskTable, MPTLStatusCard } from "../components/pages";
+import { GlassmorphismDashboard, GlassmorphismCard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 const getModelPath = (aircraft) => {
     if (aircraft?.aircraftModelId?.modelPath) {
@@ -76,10 +78,10 @@ function AircraftDetail() {
     const model = aircraft.aircraftModelId?.model || aircraft.model || 'Unknown';
 
     return (
-        <div className="h-auto w-full bg-neutral-900 text-white p-6 flex flex-col gap-6">
+        <GlassmorphismDashboard>
             {modelPath ? (
                 <Card>
-                    <h1 className="text-2xl font-semibold">{manufacturer} {model}</h1>
+                    <h1 className="text-2xl font-semibold text-white">{manufacturer} {model}</h1>
                     <p className="text-gray-300 pb-2">{aircraft.registration}</p>
                     <AircraftModel modelPath={modelPath} mpdList={mpdList} />
                 </Card>
@@ -89,7 +91,7 @@ function AircraftDetail() {
                 </Card>
             )}
 
-            <Card className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+            <Card className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-5">
                 <AircraftInfoCard 
                     aircraft={aircraft}
                     manufacturer={manufacturer}
@@ -119,18 +121,18 @@ function AircraftDetail() {
 
             {/* Active Maintenance Task Lists (MPTL) */}
             {mptlList && mptlList.length > 0 && (
-                <Card className="overflow-y-auto">
-                    <h2 className="text-xl font-semibold mb-4">Active Work Orders / Task Lists</h2>
+                <Card className="overflow-y-auto mt-5">
+                    <h2 className="text-xl font-semibold mb-4 text-white">Active Work Orders / Task Lists</h2>
                     <MPTLStatusCard mptlList={mptlList} />
                 </Card>
             )}
 
             {/* Maintenance Planning Document (MPD) */}
-            <Card className="flex-1 overflow-y-auto">
-                <h2 className="text-xl font-semibold mb-4">Maintenance Planning Document (MPD)</h2>
+            <Card className="flex-1 overflow-y-auto mt-5">
+                <h2 className="text-xl font-semibold mb-4 text-white">Maintenance Planning Document (MPD)</h2>
                 <MPDTaskTable mpdList={mpdList} />
             </Card>
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

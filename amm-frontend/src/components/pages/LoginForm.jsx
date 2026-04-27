@@ -11,8 +11,8 @@ function LoginForm({ onSubmit, error }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-neutral-800 p-8 rounded-lg shadow-md dark:shadow-lg w-96 border border-gray-200 dark:border-neutral-700">
-            <h1 className="text-2xl mb-4 text-center font-semibold text-gray-900 dark:text-white">Login</h1>
+        <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-[20px] p-8 rounded-[2rem] shadow-2xl border border-white/20 w-96">
+            <h1 className="text-3xl mb-6 text-center font-bold text-white">Login</h1>
 
             <Input
                 type="email"

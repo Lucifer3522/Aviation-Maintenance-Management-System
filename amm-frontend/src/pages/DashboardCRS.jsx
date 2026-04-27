@@ -4,6 +4,8 @@ import { mptlService, authService, taskService } from "../services";
 import Loading from "../components/Loading";
 import { StatCard, PageHeader, EmptyState } from "../components/ui";
 import { CRSCard } from "../components/pages";
+import { GlassmorphismDashboard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 function CRSDashboard() {
     const navigate = useNavigate();
@@ -102,7 +104,7 @@ function CRSDashboard() {
     const inProgressMPTLs = mptls.filter(m => m.overallStatus === 'In Progress');
 
     return (
-        <div className="h-full w-full bg-neutral-900 text-white p-6 overflow-y-auto">
+        <GlassmorphismDashboard>
             <PageHeader 
                 title="CRS Dashboard"
                 subtitle="Certificate of Release to Service - Quality Control"
@@ -284,7 +286,7 @@ function CRSDashboard() {
             {/* Awaiting CRS Section */}
             <div className="bg-neutral-800 rounded-xl overflow-hidden mb-6">
                 <div className="p-6 border-b border-neutral-700 bg-orange-900/20">
-                    <h2 className="text-xl font-semibold flex items-center gap-2">
+                    <h2 className="text-xl font-semibold flex items-center gap-2 text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-orange-400">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                         </svg>
@@ -314,7 +316,7 @@ function CRSDashboard() {
             {/* Completed MPTLs with CRS */}
             <div className="bg-neutral-800 rounded-xl overflow-hidden">
                 <div className="p-6 border-b border-neutral-700 bg-green-900/20">
-                    <h2 className="text-xl font-semibold flex items-center gap-2">
+                    <h2 className="text-xl font-semibold flex items-center gap-2 text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -340,7 +342,7 @@ function CRSDashboard() {
                     )}
                 </div>
             </div>
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

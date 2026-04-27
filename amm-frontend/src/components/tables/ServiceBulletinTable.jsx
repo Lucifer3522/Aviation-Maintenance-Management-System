@@ -11,20 +11,20 @@ function ServiceBulletinTable({ serviceBulletins }) {
     return (
         <div className="overflow-x-auto">
             <table className="w-full">
-                <thead className="bg-neutral-700">
+                <thead className="bg-white/5 border-b border-white/20">
                     <tr>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">SB Number</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Title</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Category</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Priority</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Status</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Issued Date</th>
-                        <th className="px-4 py-3 text-right text-sm font-semibold">Actions</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">SB Number</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Title</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Category</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Priority</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Status</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Issued Date</th>
+                        <th className="px-4 py-3 text-right text-sm font-semibold text-white/80">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-700">
+                <tbody className="divide-y divide-white/20">
                     {serviceBulletins.map((sb) => (
-                        <tr key={sb._id} className="hover:bg-neutral-700/50 transition">
+                        <tr key={sb._id} className="hover:bg-white/5 transition">
                             <td className="px-4 py-3 font-mono text-sm">{sb.sbNumber}</td>
                             <td className="px-4 py-3">{sb.title}</td>
                             <td className="px-4 py-3">

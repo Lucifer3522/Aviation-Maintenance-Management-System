@@ -3,6 +3,8 @@ import { authService, userService } from '../services';
 import { PageHeader, Button } from '../components/ui';
 import { UserTable, UserFormModal } from '../components/pages';
 import { StatCard } from '../components/ui';
+import { GlassmorphismDashboard } from '../components/GlassmorphismCard';
+import '../styles/glassmorphism.css';
 
 function UserManagement() {    
     const [users, setUsers] = useState([]);
@@ -86,7 +88,7 @@ function UserManagement() {
     ).length;
 
     return (
-        <div className="p-6 bg-neutral-900 min-h-screen">
+        <GlassmorphismDashboard>
             <PageHeader 
                 title="User Management"
                 subtitle="Manage System Users"
@@ -164,7 +166,7 @@ function UserManagement() {
                 onSubmit={handleSaveUser}
                 initialData={editingUser}
             />
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

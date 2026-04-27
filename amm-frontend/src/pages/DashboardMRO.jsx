@@ -5,6 +5,8 @@ import Loading from "../components/Loading";
 import { StatCard, PageHeader, Button, Card } from "../components/ui";
 import Tabs from "../components/ui/Tabs";
 import { MPTLTable, MPLTable } from "../components/tables";
+import { GlassmorphismDashboard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 function MRODashboard() {
     const navigate = useNavigate();
@@ -54,7 +56,7 @@ function MRODashboard() {
     const completedMPTLs = mptls.filter(m => m.overallStatus === 'Completed');
 
     return (
-        <div className="h-full w-full bg-neutral-100 dark:bg-neutral-900 text-gray-900 dark:text-white p-6 overflow-y-auto">
+        <GlassmorphismDashboard>
             <PageHeader 
                 title="MRO Dashboard" 
                 subtitle="Maintenance Repair Overhaul Organization"
@@ -120,7 +122,7 @@ function MRODashboard() {
                     {activeTab === 'mptls' && (
                         <div>
                             <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-xl font-semibold">Maintenance Package Task Lists</h2>
+                                <h2 className="text-xl font-semibold text-white">Maintenance Package Task Lists</h2>
                                 <Button onClick={() => navigate('/mro/mptl/create')}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -138,7 +140,7 @@ function MRODashboard() {
                     {activeTab === 'received-mpls' && (
                         <div>
                             <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-xl font-semibold">Received Maintenance Program Lists</h2>
+                                <h2 className="text-xl font-semibold text-white">Received Maintenance Program Lists</h2>
                             </div>
                             <MPLTable 
                                 mpls={mpls}
@@ -166,7 +168,7 @@ function MRODashboard() {
                     )}
                 </div>
             </Card>
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

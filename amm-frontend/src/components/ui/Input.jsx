@@ -12,10 +12,10 @@ function Input({
     ...props 
 }) {
     return (
-        <div className={`space-y-2 ${className}`}>
+        <div className={`space-y-3 ${className}`}>
             {label && (
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {label} {required && <span className="text-red-500">*</span>}
+                <label className="block text-sm font-medium text-white/90 font-semibold">
+                    {label} {required && <span className="text-red-300">*</span>}
                 </label>
             )}
             <input
@@ -26,10 +26,10 @@ function Input({
                 placeholder={placeholder}
                 required={required}
                 disabled={disabled}
-                className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-5 py-3 bg-white/10 backdrop-blur-[20px] border border-white/20 rounded-[1.5rem] text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-white/40 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg"
                 {...props}
             />
-            {error && <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>}
+            {error && <p className="text-red-300 text-sm font-medium">{error}</p>}
         </div>
     );
 }

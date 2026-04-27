@@ -7,8 +7,8 @@ function CRSCard({ mptl, onIssueCRS, onViewDetails, onViewCertificate, status = 
     const allTasksCompleted = totalTasks > 0 && completedTasks === totalTasks;
 
     return (
-        <div className="bg-neutral-800 rounded-xl p-6 hover:bg-neutral-700/50 transition-colors">
-            <div className="flex justify-between items-start mb-4">
+        <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-6 hover:bg-white/15 transition-all border border-white/20 shadow-xl">
+            <div className="flex justify-between items-start mb-5">
                 <div>
                     <div className="flex items-center gap-2 mb-1">
                         <h3 className="text-lg font-semibold text-white">
@@ -20,7 +20,7 @@ function CRSCard({ mptl, onIssueCRS, onViewDetails, onViewCertificate, status = 
                             </Badge>
                         )}
                     </div>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-white/70">
                         {mptl.aircraftId?.registration || 'N/A'}
                     </p>
                     <p className="text-sm text-white mt-1">{mptl.title}</p>

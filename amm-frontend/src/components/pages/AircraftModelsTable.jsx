@@ -2,23 +2,23 @@ import { Button } from '../ui';
 
 function AircraftModelsTable({ models, onEdit, onDelete, loading }) {
     return (
-        <div className="bg-neutral-800 rounded-xl overflow-hidden">
+        <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] overflow-hidden border border-white/20 shadow-xl">
             <table className="w-full">
-                <thead className="bg-neutral-700">
+                <thead className="bg-white/5 border-b border-white/20">
                     <tr>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Manufacturer</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Model</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Full Name</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Max Passengers</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Max Range (km)</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">3D Model</th>
-                        <th className="px-6 py-4 text-center text-sm font-semibold text-gray-300">Actions</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Manufacturer</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Model</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Full Name</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Max Passengers</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Max Range (km)</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">3D Model</th>
+                        <th className="px-6 py-4 text-center text-sm font-semibold text-white/80">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-700">
+                <tbody className="divide-y divide-white/20">
                     {loading ? (
                         <tr>
-                            <td colSpan="7" className="px-6 py-12 text-center text-gray-400">
+                            <td colSpan="7" className="px-6 py-12 text-center text-white/60">
                                 Loading models...
                             </td>
                         </tr>

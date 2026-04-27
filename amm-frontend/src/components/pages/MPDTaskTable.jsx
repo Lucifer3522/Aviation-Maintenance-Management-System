@@ -29,32 +29,32 @@ function MPDTaskTable({ mpdList }) {
             <table className="w-full text-left border-collapse">
                 <thead>
                     <tr className="border-b border-neutral-700">
-                        <th className="py-2 px-3 text-gray-400 font-medium">Code</th>
-                        <th className="py-2 px-3 text-gray-400 font-medium">Task</th>
-                        <th className="py-2 px-3 text-gray-400 font-medium">Maintenance</th>
-                        <th className="py-2 px-3 text-gray-400 font-medium">Check Type</th>
-                        <th className="py-2 px-3 text-gray-400 font-medium">Period</th>
-                        <th className="py-2 px-3 text-gray-400 font-medium">Cal FC</th>
-                        <th className="py-2 px-3 text-gray-400 font-medium">Cal FH</th>
-                        <th className="py-2 px-3 text-gray-400 font-medium">Last Done</th>
-                        <th className="py-2 px-3 text-gray-400 font-medium">Next Due</th>
-                        <th className="py-2 px-3 text-gray-400 font-medium">Status</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Code</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Task</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Maintenance</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Check Type</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Period</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Cal FC</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Cal FH</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Last Done</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Next Due</th>
+                        <th className="py-2 px-3 text-gray-900 font-medium">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {mpdList.map((mpd) => (
-                        <tr key={mpd._id} className="border-b border-neutral-700 hover:bg-neutral-700/50 transition">
-                            <td className="py-3 px-3 font-mono text-sm">{mpd.code}</td>
+                        <tr key={mpd._id} className="border-b border-white/20 hover:bg-white/5 transition">
+                            <td className="py-3 px-3 text-white font-mono text-sm">{mpd.code}</td>
                             <td className="py-3 px-3 font-mono text-xs text-gray-400">{mpd.task}</td>
-                            <td className="py-3 px-3 text-gray-300">{mpd.maintenance}</td>
+                            <td className="py-3 px-3 text-gray-900">{mpd.maintenance}</td>
                             <td className="py-3 px-3">
                                 <span className={`px-2 py-1 rounded text-xs font-semibold ${getCheckTypeBadgeClass(mpd.checkType)}`}>
                                     {mpd.checkType || '-'}
                                 </span>
                             </td>
-                            <td className="py-3 px-3">{mpd.period}</td>
-                            <td className="py-3 px-3 text-center">{mpd.cal_fc}</td>
-                            <td className="py-3 px-3 text-center">{mpd.cal_fh}</td>
+                            <td className="py-3 px-3 text-white">{mpd.period}</td>
+                            <td className="py-3 px-3 text-center text-white">{mpd.cal_fc}</td>
+                            <td className="py-3 px-3 text-center text-white">{mpd.cal_fh}</td>
                             <td className="py-3 px-3">
                                 {mpd.lastDone ? new Date(mpd.lastDone).toLocaleDateString() : '-'}
                             </td>

@@ -3,6 +3,8 @@ import { mpdService, aircraftModelService } from "../services";
 import Loading from "../components/Loading";
 import { PageHeader, Button } from "../components/ui";
 import { MPDTable, MPDFormModal } from "../components/pages";
+import { GlassmorphismDashboard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 function MPDManagement() {
     const [mpds, setMpds] = useState([]);
@@ -192,7 +194,7 @@ function MPDManagement() {
     }
 
     return (
-        <div className="h-full w-full bg-neutral-900 text-white p-6 overflow-y-auto">
+        <GlassmorphismDashboard>
             <PageHeader
                 title="MPD Management"
                 subtitle="Manage Maintenance Planning Document database"
@@ -230,7 +232,7 @@ function MPDManagement() {
                 onCanvasClick={handleCanvasClick}
                 getModelPath={getModelPath}
             />
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

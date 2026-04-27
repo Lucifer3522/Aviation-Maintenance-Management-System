@@ -1,6 +1,8 @@
 // Import Required Libraries
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom"
 import { useState } from "react"
+import "./styles/glassmorphism.css"
+import "./styles/ultra-glassmorphism-fixed.css"
 
 // ----- [ REACT PAGES ] ----- //
 
@@ -53,11 +55,9 @@ function AppLayout() {
 
   if (isLoginPage) {
     return (
-      <div className="h-screen bg-white">
+      <div className="h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
+        <Header />
         <main className="h-full">
-          <header className="bg-neutral-100 text-gray-900 fixed top-0 left-0 w-full z-50 h-[75px] border-b border-gray-300 shadow-sm">
-            <Header />
-          </header>
           <Routes>
             <Route path="/login" element={<PageLogin />} />
           </Routes>
@@ -67,16 +67,14 @@ function AppLayout() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-white">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
       {/* Application Header */}
-      <header className="bg-neutral-100 text-gray-900 fixed top-0 left-0 w-full z-50 h-[75px] border-b border-gray-300 shadow-sm">
-        <Header sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-      </header>
+      <Header sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
       {/* Main Container */}
       <div className="flex flex-1 pt-[75px] overflow-hidden">
         {/* Application Sidebar - Desktop Visible, Mobile Hidden */}
-        <aside className="hidden lg:block w-full lg:w-[280px] h-full overflow-y-auto bg-white border-r border-gray-300 flex-shrink-0">
+        <aside className="hidden lg:block w-full lg:w-[280px] h-full overflow-y-auto glass bg-gradient-to-b from-white/10 to-white/5 border-r border-white/20 flex-shrink-0 backdrop-blur-xl">
           <Sidebar closeSidebar={closeSidebar} />
         </aside>
 
@@ -89,7 +87,7 @@ function AppLayout() {
         )}
         
         <aside className={`
-          fixed left-0 top-[75px] h-[calc(100vh-75px)] w-[280px] bg-white overflow-y-auto z-40 
+          fixed left-0 top-[75px] h-[calc(100vh-75px)] w-[280px] glass bg-gradient-to-b from-white/10 to-white/5 overflow-y-auto z-40 backdrop-blur-xl border-r border-white/20
           transform transition-transform duration-300 lg:hidden
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         `}>
@@ -97,7 +95,7 @@ function AppLayout() {
         </aside>
 
         {/* Application Main Content */}
-        <main className="flex-1 bg-white overflow-y-auto w-full">
+        <main className="flex-1 glass bg-gradient-to-br from-blue-950/50 to-slate-900/50 overflow-y-auto w-full backdrop-blur-sm">
           <Routes>
             {/* Application Main Pages*/}
             <Route path="/" element={<Auth><Dashboard /></Auth>} />

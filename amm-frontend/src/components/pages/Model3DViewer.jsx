@@ -52,8 +52,8 @@ function MPDMarker({ position, onClick, isSelected }) {
 function Model3DViewer({ selectedModel, mpdPosition, onCanvasClick, getModelPath }) {
     if (!selectedModel || !getModelPath(selectedModel)) {
         return (
-            <div className="w-full h-[600px] bg-neutral-900 rounded-lg flex items-center justify-center">
-                <p className="text-gray-400">
+            <div className="w-full h-[600px] bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] flex items-center justify-center border border-white/20 shadow-2xl">
+                <p className="text-white/70">
                     {selectedModel 
                         ? "3D model not available for this aircraft" 
                         : "Please select an aircraft model"}
@@ -63,7 +63,7 @@ function Model3DViewer({ selectedModel, mpdPosition, onCanvasClick, getModelPath
     }
 
     return (
-        <div className="w-full h-[600px] bg-neutral-900 rounded-lg overflow-hidden">
+        <div className="w-full h-[600px] bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] overflow-hidden border border-white/20 shadow-2xl">
             <Canvas onClick={onCanvasClick}>
                 <Suspense fallback={<LoadingFallback />}>
                     <PerspectiveCamera makeDefault position={[0, 5, 15]} />

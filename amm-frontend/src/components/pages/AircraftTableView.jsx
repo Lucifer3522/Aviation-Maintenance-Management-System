@@ -2,12 +2,12 @@ import { Badge, Button } from "../ui";
 
 function AircraftTableView({ aircraft, onView, onEdit, onDelete }) {
     return (
-        <div className="bg-neutral-800 rounded-xl overflow-hidden">
+        <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] overflow-hidden border border-white/20 shadow-xl">
             <div className="overflow-x-auto">
                 <table className="w-full">
-                    <thead className="bg-neutral-900 border-b border-neutral-700">
+                    <thead className="bg-white/5 border-b border-white/20">
                         <tr>
-                            <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                            <th className="px-6 py-4 text-left text-sm font-semibold text-white/80 uppercase tracking-wider">
                                 Registration
                             </th>
                             <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
@@ -30,11 +30,11 @@ function AircraftTableView({ aircraft, onView, onEdit, onDelete }) {
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-neutral-700">
+                    <tbody className="divide-y divide-white/20">
                         {aircraft.map((craft) => (
                             <tr
                                 key={craft._id}
-                                className="hover:bg-neutral-700 transition-colors cursor-pointer"
+                                className="hover:bg-white/5 transition-colors cursor-pointer"
                                 onClick={() => onView(craft._id)}
                             >
                                 <td className="px-6 py-4">

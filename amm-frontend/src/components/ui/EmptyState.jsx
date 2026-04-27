@@ -1,15 +1,15 @@
 function EmptyState({ title, description, icon, action }) {
     return (
-        <div className="bg-white dark:bg-neutral-800 rounded-xl p-8 text-center border border-gray-200 dark:border-neutral-700">
+        <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-12 text-center border border-white/20 shadow-lg">
             {icon && (
-                <div className="flex justify-center mb-4">
-                    <div className="bg-gray-100 dark:bg-neutral-700 p-4 rounded-full text-gray-600 dark:text-gray-400">
+                <div className="flex justify-center mb-6">
+                    <div className="bg-white/20 backdrop-blur-[15px] p-6 rounded-[1.75rem] text-white/80 border border-white/20">
                         {icon}
                     </div>
                 </div>
             )}
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
-            {description && <p className="text-gray-600 dark:text-gray-400 mb-4">{description}</p>}
+            <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
+            {description && <p className="text-white/70 mb-6 text-lg">{description}</p>}
             {action}
         </div>
     );

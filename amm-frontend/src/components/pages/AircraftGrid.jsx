@@ -19,7 +19,7 @@ function AircraftGrid({ aircraft, onView, onEdit, onDelete }) {
             {aircraft.map((craft) => (
                 <div
                     key={craft._id}
-                    className="bg-neutral-800 overflow-hidden rounded-xl p-0 hover:bg-neutral-700/50 transition-all cursor-pointer border border-neutral-700"
+                    className="bg-white/10 backdrop-blur-[20px] overflow-hidden rounded-[2rem] p-0 hover:bg-white/15 transition-all cursor-pointer border border-white/20 shadow-xl hover:shadow-2xl"
                 >
                     
                     {getModelPath(craft) && (

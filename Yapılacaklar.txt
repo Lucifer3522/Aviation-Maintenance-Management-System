@@ -1,4 +1,3 @@
-> Log Sistemi: Her yapılan işlem için bir aktivite günlüğü tutulcak
 > Database kaydetme : internet bağlantısı olmadığında veriler yine kullanılabilsin
-> SB Eklencek
-> Login ekranı arkaplanı değişcek
+> Role düzenlemede üst rolleri alt roller düzenleyemesin
+> 

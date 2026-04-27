@@ -5,6 +5,8 @@ import Loading from "../components/Loading";
 import { StatCard, PageHeader, Button, Card } from "../components/ui";
 import Tabs from "../components/ui/Tabs";
 import { MPLTable, MPDTable, ServiceBulletinTable } from "../components/tables";
+import { GlassmorphismDashboard, GlassmorphismGrid, GlassmorphismCard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 function CAMODashboard() {
     const navigate = useNavigate();
@@ -72,7 +74,7 @@ function CAMODashboard() {
     const activeMPLs = mpls.filter(m => m.status === 'Active');
 
     return (
-        <div className="h-full w-full bg-neutral-100 dark:bg-neutral-900 text-gray-900 dark:text-white p-6 overflow-y-auto">
+        <GlassmorphismDashboard>
             <PageHeader 
                 title="CAMO Dashboard" 
                 subtitle="Continuing Airworthiness Management Organization"
@@ -139,7 +141,7 @@ function CAMODashboard() {
                     {activeTab === 'mpls' && (
                         <div>
                             <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-xl font-semibold">Maintenance Program Lists</h2>
+                                <h2 className="text-xl font-semibold text-white">Maintenance Program Lists</h2>
                                 <Button onClick={() => navigate('/camo/mpl/create')}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -158,7 +160,7 @@ function CAMODashboard() {
                     {activeTab === 'mpds' && (
                         <div>
                             <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-xl font-semibold">Manufacturer MPDs</h2>
+                                <h2 className="text-xl font-semibold text-white">Manufacturer MPDs</h2>
                             </div>
                             <MPDTable mpds={mpds} limit={10} />
                         </div>
@@ -167,7 +169,7 @@ function CAMODashboard() {
                     {activeTab === 'sb' && (
                         <div>
                             <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-xl font-semibold">Service Bulletins</h2>
+                                <h2 className="text-xl font-semibold text-white">Service Bulletins</h2>
                                 <Button onClick={() => navigate('/camo/sb/create')}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -180,7 +182,7 @@ function CAMODashboard() {
                     )}
                 </div>
             </Card>
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

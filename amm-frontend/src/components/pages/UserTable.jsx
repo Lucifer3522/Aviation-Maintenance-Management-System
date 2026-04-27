@@ -32,19 +32,19 @@ export default function UserTable({ users, onEditUser, onDeleteUser, loading }) 
     }
 
     return (
-        <div className="bg-neutral-800 rounded-lg p-6 overflow-x-auto">
+        <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-6 overflow-x-auto border border-white/20 shadow-xl">
             <table className="w-full">
-                <thead className="bg-neutral-700">
+                <thead className="bg-white/5 border-b border-white/20">
                     <tr>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-white">User</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-white">Role</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-white">Organization</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-white">License</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-white">Created</th>
-                        <th className="px-4 py-3 text-right text-sm font-semibold text-white">Actions</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">User</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Role</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Organization</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">License</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Created</th>
+                        <th className="px-4 py-3 text-right text-sm font-semibold text-white/80">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-700">
+                <tbody className="divide-y divide-white/20">
                     {users.map((user) => (
                         <tr key={user._id} className="hover:bg-neutral-700/50 transition text-white">
                             <td className="px-4 py-3">

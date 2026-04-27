@@ -4,6 +4,8 @@ import { aircraftModelService } from "../services";
 import Loading from "../components/Loading";
 import { PageHeader, Button } from "../components/ui";
 import { AircraftModelsTable, AircraftModelFormModal } from "../components/pages";
+import { GlassmorphismDashboard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 function AircraftModels() {
     const [models, setModels] = useState([]);
@@ -135,7 +137,7 @@ function AircraftModels() {
     }
 
     return (
-        <div className="h-full w-full bg-neutral-900 text-white p-6 overflow-y-auto">
+        <GlassmorphismDashboard>
             <PageHeader
                 title="Aircraft Models"
                 subtitle="Manage aircraft model database"
@@ -166,7 +168,7 @@ function AircraftModels() {
                 onChange={handleChange}
                 editingModel={editingModel}
             />
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

@@ -4,6 +4,8 @@ import Model3DViewer from "../components/pages/Model3DViewer";
 import { mptlService, aircraftService, authService } from "../services";
 import Loading from "../components/Loading";
 import { Button, Card, Badge } from "../components/ui";
+import { GlassmorphismDashboard, GlassmorphismCard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 const getModelPath = (aircraft) => {
     if (aircraft?.aircraftModelId?.modelPath) {
@@ -176,12 +178,12 @@ function ViewMPTL() {
     const currentTask = selectedTask || (mptl.tasks && mptl.tasks.length > 0 ? mptl.tasks[0] : null);
 
     return (
-        <div className="h-full w-full bg-neutral-900 text-white p-6 flex flex-col gap-6 overflow-y-auto">
+        <GlassmorphismDashboard>
             <Card>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
                         <div className="flex items-center gap-3 mb-2">
-                            <h1 className="text-2xl font-semibold">{mptl.title}</h1>
+                            <h1 className="text-2xl font-semibold text-white">{mptl.title}</h1>
                             <Badge 
                                 variant={
                                     overallStatus === 'Completed' ? 'success' :
@@ -199,10 +201,10 @@ function ViewMPTL() {
             </Card>
 
             {modelPath && currentTask && currentTask.mpdId ? (
-                <Card>
+                <Card className="mt-5">
                     <div className="flex justify-between items-center mb-4">
                         <div>
-                            <h2 className="text-xl font-semibold">Task Location on Aircraft</h2>
+                            <h2 className="text-xl font-semibold text-white">Task Location on Aircraft</h2>
                             <p className="text-gray-400 text-sm mt-1">
                                 Showing: {currentTask.taskNumber} - {currentTask.description}
                             </p>
@@ -221,12 +223,9 @@ function ViewMPTL() {
                         onCanvasClick={() => {}}
                         getModelPath={getModelPath}
                     />
-                    <p className="text-gray-400 text-sm mt-2">
-                        * Marker shows the maintenance location for the currently selected task.
-                    </p>
                 </Card>
             ) : modelPath ? (
-                <Card>
+                <Card className="mt-6">
                     <h2 className="text-xl font-semibold mb-4">Aircraft 3D Model</h2>
                     <Model3DViewer 
                         selectedModel={aircraft}
@@ -236,13 +235,13 @@ function ViewMPTL() {
                     />
                 </Card>
             ) : (
-                <Card>
+                <Card className="mt-6">
                     <p className="text-gray-400">3D model not available for this aircraft.</p>
                 </Card>
             )}
 
-            <Card>
-                <h2 className="text-xl font-semibold mb-4">Work Order Summary</h2>
+            <Card className="mt-6">
+                <h2 className="text-xl font-semibold mb-4 text-white">Work Order Summary</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="bg-neutral-700 rounded-lg p-4">
                         <p className="text-gray-400 text-sm">Work Order</p>
@@ -272,7 +271,7 @@ function ViewMPTL() {
             </Card>
 
             {mptl.crsIssued ? (
-                <Card className="bg-green-900/20 border-green-700">
+                <Card className="bg-green-900/20 border-green-700 mt-6">
                     <div className="flex items-start justify-between">
                         <div>
                             <div className="flex items-center gap-2 mb-2">
@@ -295,7 +294,7 @@ function ViewMPTL() {
                     </div>
                 </Card>
             ) : mptl.overallStatus === 'Awaiting CRS' ? (
-                <Card className="bg-yellow-900/20 border-yellow-700">
+                <Card className="bg-yellow-900/20 border-yellow-700 mt-6">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-yellow-400">
@@ -336,7 +335,7 @@ function ViewMPTL() {
                 </Card>
             ) : (
                 completedTasks === totalTasks && totalTasks > 0 && (
-                    <Card className="bg-blue-900/20 border-blue-700">
+                    <Card className="bg-blue-900/20 border-blue-700 mt-6">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-blue-400">
@@ -360,8 +359,8 @@ function ViewMPTL() {
                 )
             )}
 
-            <Card>
-                <h2 className="text-xl font-semibold mb-4">Tasks ({totalTasks})</h2>
+            <Card className="mt-6">
+                <h2 className="text-xl font-semibold mb-4 text-white">Tasks ({totalTasks})</h2>
                 {mptl.tasks.length === 0 ? (
                     <p className="text-gray-400 text-center py-8">No Tasks</p>
                 ) : (
@@ -528,14 +527,14 @@ function ViewMPTL() {
             </Card>
 
             {mptl.mplId && (
-                <Card>
-                    <h2 className="text-xl font-semibold mb-2">Maintenance Program Reference</h2>
+                <Card className="mt-6 bg-neutral-900/50 border-neutral-700">
+                    <h2 className="text-xl font-semibold mb-2 text-white">Maintenance Program Reference</h2>
                     <p className="text-gray-300">
                         Based on MPL: {mptl.mplId?.title || mptl.mplId?.name || 'N/A'}
                     </p>
                 </Card>
             )}
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

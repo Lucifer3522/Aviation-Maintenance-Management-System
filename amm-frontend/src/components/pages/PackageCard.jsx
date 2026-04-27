@@ -18,7 +18,7 @@ export default function PackageCard({ package: pkg, onClick }) {
 
     return (
         <div
-            className="bg-neutral-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all cursor-pointer hover:bg-neutral-700/50"
+            className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-6 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:bg-white/15 border border-white/20"
             onClick={onClick}
         >
             <div className="flex justify-between items-start mb-4">

@@ -4,6 +4,8 @@ import { aircraftService } from "../services/service-aircraft";
 import Loading from "../components/Loading";
 import { Button, EmptyState } from "../components/ui";
 import { PackageCard, PackageDetailModal } from "../components/pages";
+import { GlassmorphismDashboard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 function MaintenancePackages() {
     const { aircraftId } = useParams();
@@ -38,7 +40,7 @@ function MaintenancePackages() {
     }
 
     return (
-        <div className="h-full w-full bg-neutral-900 text-white p-6 overflow-y-auto">
+        <GlassmorphismDashboard>
             <div className="mb-6">
                 <Button
                     variant="secondary"
@@ -81,7 +83,7 @@ function MaintenancePackages() {
                 isOpen={!!selectedPackage}
                 onClose={() => setSelectedPackage(null)}
             />
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

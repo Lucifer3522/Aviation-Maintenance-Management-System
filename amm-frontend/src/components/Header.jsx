@@ -20,12 +20,12 @@ function Header({ sidebarOpen, toggleSidebar }) {
     };
 
     return (
-        <header className="bg-neutral-900 h-full">
-            <nav aria-label="Global" className="h-full mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
+        <header className="bg-white/10 backdrop-blur-[20px] fixed top-0 left-0 w-full h-[75px] z-50 border-b border-white/20 shadow-lg mt-0 ml-0 rounded-none">
+            <nav aria-label="Global" className="h-full mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-10">
                 {isLoggedIn && (
                     <button
                         onClick={toggleSidebar}
-                        className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none transition-colors"
+                        className="lg:hidden inline-flex items-center justify-center p-3 rounded-[1.25rem] text-white/70 hover:text-white hover:bg-white/20 focus:outline-none transition-all backdrop-blur-[15px] border border-white/20"
                         aria-label="Toggle sidebar"
                     >
                         <svg
@@ -54,13 +54,13 @@ function Header({ sidebarOpen, toggleSidebar }) {
                 )}
 
                 {/* Logo & Brand */}
-                <div className="flex lg:flex-1 items-center gap-2 sm:gap-4">
-                    <a href="/" className="flex items-center gap-2 sm:gap-3">
-                        <img src={Logo} alt="Logo" className="h-6 sm:h-8 w-auto" />
-                        <span className="text-white text-sm sm:text-base lg:text-lg font-medium hidden sm:inline">
-                            My Maintenance Network
+                <div className="flex lg:flex-1 items-center gap-3 sm:gap-4">
+                    <a href="/" className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity">
+                        <img src={Logo} alt="Logo" className="h-8 sm:h-10 w-auto" />
+                        <span className="text-white text-base sm:text-lg lg:text-xl font-bold hidden sm:inline bg-gradient-to-r from-blue-200 to-blue-100 bg-clip-text text-transparent">
+                            Aviation Maintenance Manager
                         </span>
-                        <span className="text-white text-xs sm:hidden">MMN</span>
+                        <span className="text-white text-xs sm:hidden font-bold">AMM</span>
                     </a>
                 </div>
 
@@ -74,7 +74,7 @@ function Header({ sidebarOpen, toggleSidebar }) {
                         >
                             <button
                                 onClick={handleLogout}
-                                className="px-2 sm:px-4 py-2 text-xs sm:text-sm text-red-400 hover:bg-neutral-700 transition-colors flex items-center gap-1 sm:gap-2 rounded-md"
+                                className="px-4 sm:px-6 py-2.5 text-xs sm:text-sm text-red-200 hover:text-red-100 hover:bg-red-500/20 transition-all flex items-center gap-1 sm:gap-2 rounded-[1.25rem] backdrop-blur-[15px] border border-red-400/30 hover:border-red-400/60 font-medium"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

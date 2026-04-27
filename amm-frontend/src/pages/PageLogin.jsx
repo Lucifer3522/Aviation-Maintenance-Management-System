@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services";
 import { LoginForm } from "../components/pages";
+import "../styles/glassmorphism.css";
 
 function Login() {
     const [error, setError] = useState(null);
@@ -39,8 +40,22 @@ function Login() {
     };
 
     return (
-        <div className="flex items-center justify-center h-full w-full bg-neutral-50 dark:bg-neutral-950 text-gray-900 dark:text-white">
-            <LoginForm onSubmit={handleSubmit} error={error} />
+        <div className="relative h-full w-full bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden">
+            {/* Animated Background Overlays */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+            </div>
+
+            {/* Login Form Container */}
+            <div className="relative z-10 flex items-center justify-center h-full w-full px-4">
+                <div className="w-full max-w-md">                    
+                    <div className="space-y-6">
+                        <LoginForm onSubmit={handleSubmit} error={error} />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

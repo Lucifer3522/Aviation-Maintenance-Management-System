@@ -44,7 +44,7 @@ export default function SystemLogsTable({ logs, onRefresh, loading, pagination, 
 
     return (
         <>
-            <div className="bg-neutral-800 rounded-lg p-6 overflow-x-auto">
+            <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-6 overflow-x-auto border border-white/20 shadow-xl">
                 <table className="w-full">
                     <thead className="bg-neutral-700">
                         <tr>

@@ -4,6 +4,8 @@ import { aircraftService } from "../services";
 import authService from "../services/service-auth";
 import { PageHeader, Button, Modal, EmptyState } from "../components/ui";
 import { AircraftGrid, AircraftTableView } from "../components/pages";
+import { GlassmorphismDashboard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -76,7 +78,7 @@ function Dashboard() {
     };
 
     return (
-        <div className="p-4 h-full w-full bg-neutral-100 dark:bg-neutral-900 text-gray-900 dark:text-white p-6 overflow-y-auto">
+        <GlassmorphismDashboard>
             <PageHeader
                 title="Aircraft Dashboard"
                 subtitle="Managing and Monitoring Aircraft Fleet"
@@ -179,7 +181,7 @@ function Dashboard() {
                     </Button>
                 </div>
             </Modal>
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 export default Dashboard;

@@ -73,7 +73,7 @@ function AircraftModel({ modelPath, mpdList = [] }) {
     const [selectedMPD, setSelectedMPD] = useState(null);
     
     return (
-        <div className="w-full h-[500px] bg-neutral-900 rounded-lg overflow-hidden relative">
+        <div className="w-full h-[500px] bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] overflow-hidden relative border border-white/20 shadow-2xl">
             <Canvas>
                 <Suspense fallback={<LoadingFallback />}>
                     <PerspectiveCamera makeDefault position={[0, 5, 15]} />
@@ -117,37 +117,37 @@ function AircraftModel({ modelPath, mpdList = [] }) {
                 </Suspense>
             </Canvas>
             
-            <div className="absolute top-4 right-4 bg-neutral-800/90 backdrop-blur-sm p-3 rounded-lg text-xs space-y-2">
-                <div className="font-semibold text-white mb-2">Status Legend:</div>
+            <div className="absolute top-5 right-5 bg-white/10 backdrop-blur-[20px] p-4 rounded-[1.5rem] text-xs space-y-3 border border-white/20 shadow-xl">
+                <div className="font-semibold text-white mb-3">Status Legend:</div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                    <span className="text-gray-300">Completed</span>
+                    <span className="text-white/70">Completed</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                    <span className="text-gray-300">Pending</span>
+                    <span className="text-white/70">Pending</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-blue-400"></div>
-                    <span className="text-gray-300">In Progress</span>
+                    <span className="text-white/70">In Progress</span>
                 </div>
             </div>
             
             {selectedMPD && (
-                <div className="absolute bottom-4 left-4 bg-neutral-800/95 backdrop-blur-sm p-4 rounded-lg max-w-sm">
+                <div className="absolute bottom-5 left-5 bg-white/10 backdrop-blur-[20px] p-5 rounded-[1.5rem] max-w-sm border border-white/20 shadow-xl">
                     <button 
                         onClick={() => setSelectedMPD(null)}
-                        className="absolute top-2 right-2 text-gray-400 hover:text-white"
+                        className="absolute top-3 right-3 text-white/70 hover:text-white transition-colors"
                     >
                         ✕
                     </button>
                     <div className="text-white">
-                        <div className="font-bold text-lg mb-2">{selectedMPD.code}</div>
-                        <div className="text-sm space-y-1">
-                            <div><span className="text-gray-400">Task:</span> {selectedMPD.task}</div>
-                            <div><span className="text-gray-400">Maintenance:</span> {selectedMPD.maintenance}</div>
-                            <div><span className="text-gray-400">Period:</span> {selectedMPD.period}</div>
-                            <div><span className="text-gray-400">Status:</span> 
+                        <div className="font-bold text-lg mb-3">{selectedMPD.code}</div>
+                        <div className="text-sm space-y-2">
+                            <div><span className="text-white/60">Task:</span> {selectedMPD.task}</div>
+                            <div><span className="text-white/60">Maintenance:</span> {selectedMPD.maintenance}</div>
+                            <div><span className="text-white/60">Period:</span> {selectedMPD.period}</div>
+                            <div><span className="text-white/60">Status:</span> 
                                 <span className={`ml-2 font-semibold ${
                                     selectedMPD.status === "Completed" ? "text-green-400" :
                                     selectedMPD.status === "Pending" ? "text-yellow-400" : 

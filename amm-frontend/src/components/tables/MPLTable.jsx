@@ -11,23 +11,23 @@ function MPLTable({ mpls, onSendToMRO, onDelete, hideActions = false, customActi
     return (
         <div className="overflow-x-auto">
             <table className="w-full">
-                <thead className="bg-neutral-700">
+                <thead className="bg-white/5 border-b border-white/20">
                     <tr>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">MP Number</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Aircraft</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Title</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Scheduling</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Status</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold">Sent to MRO</th>
-                        <th className="px-4 py-3 text-right text-sm font-semibold">Actions</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">MP Number</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Aircraft</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Title</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Scheduling</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Status</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Sent to MRO</th>
+                        <th className="px-4 py-3 text-right text-sm font-semibold text-white/80">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-700">
+                <tbody className="divide-y divide-white/20">
                     {mpls.map((mpl) => (
-                        <tr key={mpl._id} className="hover:bg-neutral-700/50 transition">
-                            <td className="px-4 py-3 font-mono text-sm">{mpl.mpNumber}</td>
-                            <td className="px-4 py-3">{mpl.aircraftId?.registration || 'N/A'}</td>
-                            <td className="px-4 py-3">{mpl.title}</td>
+                        <tr key={mpl._id} className="hover:bg-white/5 transition">
+                            <td className="px-4 py-3 font-mono text-sm text-white">{mpl.mpNumber}</td>
+                            <td className="px-4 py-3 text-white">{mpl.aircraftId?.registration || 'N/A'}</td>
+                            <td className="px-4 py-3 text-white">{mpl.title}</td>
                             <td className="px-4 py-3">
                                 <Badge size="sm" variant="default">{mpl.schedulingType}</Badge>
                             </td>

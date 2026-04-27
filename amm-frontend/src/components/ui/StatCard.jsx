@@ -1,23 +1,23 @@
 function StatCard({ title, value, icon, color = "blue", className = "" }) {
     const colors = {
-        blue: "bg-blue-600",
-        green: "bg-green-600",
-        yellow: "bg-yellow-600",
-        red: "bg-red-600",
-        purple: "bg-purple-600",
-        indigo: "bg-indigo-600",
-        orange: "bg-orange-600"
+        blue: "bg-gradient-to-br from-blue-500/70 to-blue-600/70",
+        green: "bg-gradient-to-br from-emerald-500/70 to-emerald-600/70",
+        yellow: "bg-gradient-to-br from-amber-500/70 to-amber-600/70",
+        red: "bg-gradient-to-br from-red-500/70 to-red-600/70",
+        purple: "bg-gradient-to-br from-purple-500/70 to-purple-600/70",
+        indigo: "bg-gradient-to-br from-indigo-500/70 to-indigo-600/70",
+        orange: "bg-gradient-to-br from-orange-500/70 to-orange-600/70"
     };
     
     return (
-        <div className={`bg-white dark:bg-neutral-800 rounded-xl p-6 shadow dark:shadow-lg border border-gray-200 dark:border-neutral-700 ${className}`}>
+        <div className={`bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-8 shadow-lg border border-white/20 hover:shadow-xl transition-all ${className}`}>
             <div className="flex items-center justify-between">
                 <div>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{title}</p>
-                    <p className="text-3xl font-bold mt-2 text-gray-900 dark:text-white">{value}</p>
+                    <p className="text-white/70 text-sm font-medium">{title}</p>
+                    <p className="text-3xl font-bold mt-3 text-white">{value}</p>
                 </div>
                 {icon && (
-                    <div className={`${colors[color]} p-3 rounded-lg text-white`}>
+                    <div className={`${colors[color]} backdrop-blur-[15px] p-4 rounded-[1.5rem] text-white border border-white/20`}>
                         {icon}
                     </div>
                 )}

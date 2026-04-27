@@ -15,30 +15,30 @@ function MPDTable({ mpds, aircraftModels, onEdit, onDelete, loading }) {
     };
 
     return (
-        <div className="bg-neutral-800 rounded-xl overflow-hidden">
+        <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] overflow-hidden border border-white/20 shadow-xl">
             <table className="w-full">
-                <thead className="bg-neutral-700">
+                <thead className="bg-white/5 border-b border-white/20">
                     <tr>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Code</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Task</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Aircraft Model</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Maintenance</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Check Type</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Period</th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">ATA</th>
-                        <th className="px-6 py-4 text-right text-sm font-semibold text-gray-300">Actions</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Code</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Task</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Aircraft Model</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Maintenance</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Check Type</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">Period</th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-white/80">ATA</th>
+                        <th className="px-6 py-4 text-right text-sm font-semibold text-white/80">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-700">
+                <tbody className="divide-y divide-white/20">
                     {loading ? (
                         <tr>
-                            <td colSpan="8" className="px-6 py-12 text-center text-gray-400">
+                            <td colSpan="8" className="px-6 py-12 text-center text-white/60">
                                 Loading MPDs...
                             </td>
                         </tr>
                     ) : mpds.length === 0 ? (
                         <tr>
-                            <td colSpan="8" className="px-6 py-12 text-center text-gray-400">
+                            <td colSpan="8" className="px-6 py-12 text-center text-white/60">
                                 No MPDs found. Click "Add New MPD" to create one.
                             </td>
                         </tr>
@@ -46,7 +46,7 @@ function MPDTable({ mpds, aircraftModels, onEdit, onDelete, loading }) {
                         mpds.map((mpd) => {
                             const model = aircraftModels.find(m => m._id === mpd.aircraftModelId);
                             return (
-                                <tr key={mpd._id} className="hover:bg-neutral-700/50 transition">
+                                <tr key={mpd._id} className="hover:bg-white/5 transition">
                                     <td className="px-6 py-4 font-mono text-sm text-white font-medium">
                                         {mpd.code}
                                     </td>

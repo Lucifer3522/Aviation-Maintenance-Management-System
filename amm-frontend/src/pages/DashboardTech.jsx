@@ -4,6 +4,8 @@ import { mptlService, authService, taskService } from "../services";
 import Loading from "../components/Loading";
 import { StatCard, PageHeader, EmptyState } from "../components/ui";
 import { TaskCard } from "../components/pages";
+import { GlassmorphismDashboard } from "../components/GlassmorphismCard";
+import "../styles/glassmorphism.css";
 
 function TechnicianDashboard() {
     const navigate = useNavigate();
@@ -210,7 +212,7 @@ function TechnicianDashboard() {
     };
 
     return (
-        <div className="h-full w-full bg-neutral-100 dark:bg-neutral-900 text-gray-900 dark:text-white p-6 overflow-y-auto">
+        <GlassmorphismDashboard>
             <PageHeader 
                 title={`${getRoleIcon(user.role)} Technician Dashboard`}
                 subtitle={`${
@@ -387,7 +389,7 @@ function TechnicianDashboard() {
 
             <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                    <h2 className="text-xl font-semibold">My Assigned Tasks</h2>
+                    <h2 className="text-xl font-semibold text-white">My Assigned Tasks</h2>
                     
                     {/* Task Filter Buttons */}
                     <div className="flex gap-2">
@@ -530,7 +532,7 @@ function TechnicianDashboard() {
                     </div>
                 </div>
             )}
-        </div>
+        </GlassmorphismDashboard>
     );
 }
 

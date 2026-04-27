@@ -3,7 +3,7 @@ import { Badge, Button } from "../ui";
 export default function RoleTable({ roles, onEdit, onDelete, loading, isSuperAdmin }) {
     if (loading) {
         return (
-            <div className="bg-neutral-800 rounded-lg p-6">
+            <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-6 border border-white/20 shadow-xl">
                 <p className="text-white text-center">Loading roles...</p>
             </div>
         );
@@ -11,31 +11,31 @@ export default function RoleTable({ roles, onEdit, onDelete, loading, isSuperAdm
 
     if (roles.length === 0) {
         return (
-            <div className="bg-neutral-800 rounded-lg p-6">
-                <p className="text-gray-400 text-center py-8">No roles found</p>
+            <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-6 border border-white/20 shadow-xl">
+                <p className="text-white/70 text-center py-8">No roles found</p>
             </div>
         );
     }
 
     return (
-        <div className="fg-neutral-800 rounded-lg p-6 overflow-x-auto">
+        <div className="bg-white/10 backdrop-blur-[20px] rounded-[2rem] p-6 overflow-x-auto border border-white/20 shadow-xl">
             <table className="w-full">
-                <thead>
+                <thead className="bg-white/5 border-b border-white/20">
                     <tr>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-white">Emote</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-white">Role</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-white">Description</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-white">Permissions</th>
-                        <th className="px-4 py-3 text-right text-sm font-semibold text-white">Status</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Emote</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Role</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Description</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-white/80">Permissions</th>
+                        <th className="px-4 py-3 text-right text-sm font-semibold text-white/80">Status</th>
                         {isSuperAdmin && (
-                            <th className="px-4 py-3 text-right text-sm font-semibold text-white">Actions</th>
+                            <th className="px-4 py-3 text-right text-sm font-semibold text-white/80">Actions</th>
                         )}
                     </tr>
                 </thead>
                 
-                <tbody className="divide-y divide-neutral-700">
+                <tbody className="divide-y divide-white/20">
                     {roles.map((role) => (
-                        <tr key={role._id} className="hover:bg-neutral-700/50 transition text-white">
+                        <tr key={role._id} className="hover:bg-white/5 transition text-white">
                             <td className="px-4 py-3">{role.icon}</td>
                             <td className="px-4 py-3">
                                 <div>

@@ -1,0 +1,198 @@
+/* Ultra-Modern Glassmorphism – iOS 26 Aesthetic */
+
+/* ===== RESET DARK MODE CLASSES ===== */
+.dark {
+  color-scheme: dark;
+}
+
+/* ===== COMPONENT BASE STYLES ===== */
+
+/* Cards & Containers */
+.glass-card,
+.card,
+[class*="rounded-xl"],
+[class*="bg-white dark:"],
+[class*="bg-gray-"],
+[class*="bg-neutral-"] {
+  @apply bg-white/10 backdrop-blur-[20px] border border-white/20;
+}
+
+/* Navigation & Sidebar */
+aside,
+nav {
+  @apply bg-transparent;
+}
+
+.sidebar-item {
+  @apply p-3 text-white rounded-[1.25rem] hover:bg-white/20 transition-all font-semibold;
+}
+
+/* Tables */
+table {
+  @apply text-white;
+}
+
+thead {
+  @apply bg-gradient-to-r from-white/5 to-white/10 border-b border-white/20;
+}
+
+tbody tr {
+  @apply hover:bg-white/10 transition-colors border-b border-white/20;
+}
+
+tbody td {
+  @apply text-white/80 px-8 py-5;
+}
+
+/* Form Elements */
+input,
+select,
+textarea {
+  @apply bg-white/10 backdrop-blur-[20px] border border-white/20 rounded-[1.5rem] text-white placeholder-white/50;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  @apply ring-2 ring-blue-400/50 border-white/40;
+}
+
+/* Buttons */
+button {
+  /* Base style preserved - adjusted per variant */
+}
+
+.btn-glass {
+  @apply rounded-[2rem] backdrop-blur-[20px] border border-white/20 shadow-lg transition-all;
+}
+
+/* Badges & Pills */
+.badge,
+span[class*="inline-block"] {
+  @apply rounded-[1.25rem] backdrop-blur-[15px] border border-white/20;
+}
+
+/* Modals */
+.modal-overlay {
+  @apply bg-black/40 backdrop-blur-[10px];
+}
+
+.modal-content {
+  @apply bg-white/15 backdrop-blur-[30px] rounded-[2.5rem] border border-white/20 shadow-2xl;
+}
+
+/* Text Colors */
+p,
+span,
+label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* Preserve semantic meaning - override specific gray classes */
+}
+
+.text-gray-900 {
+  @apply text-white !important;
+}
+
+.text-gray-700,
+.text-gray-600 {
+  @apply text-white/80 !important;
+}
+
+.text-gray-400,
+.text-gray-500 {
+  @apply text-white/60 !important;
+}
+
+/* Dark Mode Overrides */
+.dark\:text-white {
+  @apply text-white;
+}
+
+.dark\:bg-neutral-800,
+.dark\:bg-neutral-900 {
+  @apply bg-white/10 backdrop-blur-[20px] border border-white/20;
+}
+
+.dark\:border-neutral-700,
+.dark\:border-gray-700 {
+  @apply border-white/20;
+}
+
+.dark\:hover\:bg-neutral-700,
+.dark\:hover\:bg-gray-700 {
+  @apply hover:bg-white/20;
+}
+
+/* Status Colors - Glass Style */
+.bg-blue-900 {
+  @apply bg-blue-500/40 border border-blue-400/30;
+}
+
+.bg-green-900 {
+  @apply bg-emerald-500/40 border border-emerald-400/30;
+}
+
+.bg-red-900 {
+  @apply bg-red-500/40 border border-red-400/30;
+}
+
+.bg-yellow-900 {
+  @apply bg-amber-500/40 border border-amber-400/30;
+}
+
+.bg-purple-900 {
+  @apply bg-purple-500/40 border border-purple-400/30;
+}
+
+/* Dividers */
+.border-gray-300,
+.border-gray-200,
+.border-neutral-700,
+.border-neutral-600 {
+  @apply border-white/20;
+}
+
+/* Shadows */
+.shadow-sm {
+  @apply shadow-lg;
+}
+
+.shadow {
+  @apply shadow-lg;
+}
+
+/* Hover Enhancements */
+.hover\:bg-gray-100,
+.hover\:bg-gray-50 {
+  @apply hover:bg-white/10;
+}
+
+.group:hover .group-hover\:bg-gray-700 {
+  @apply bg-white/20;
+}
+
+/* Transitions */
+* {
+  @apply transition-all duration-200;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .glass-card,
+  .card {
+    @apply rounded-[1.5rem];
+  }
+}
+
+/* Print Styles */
+@media print {
+  .glass-card,
+  [class*="backdrop-blur"] {
+    @apply backdrop-blur-none bg-white text-gray-900;
+  }
+}

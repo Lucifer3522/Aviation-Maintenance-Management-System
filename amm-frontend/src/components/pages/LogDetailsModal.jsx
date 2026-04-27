@@ -22,42 +22,42 @@ export default function LogDetailsModal({ isOpen, onClose, log }) {
         >
             <div className="space-y-4">
                 {/* Header Information */}
-                <div className="grid grid-cols-2 gap-4 mb-6 pb-4 border-b border-neutral-700">
+                <div className="grid grid-cols-2 gap-4 mb-6 pb-4 border-b border-white/20">
                     <div>
-                        <p className="text-xs text-gray-500 font-semibold uppercase">Timestamp</p>
+                        <p className="text-xs text-white/50 font-semibold uppercase">Timestamp</p>
                         <p className="text-white mt-1">
                             {new Date(log.timestamp).toLocaleString()}
                         </p>
                     </div>
                     <div>
-                        <p className="text-xs text-gray-500 font-semibold uppercase">Action Type</p>
+                        <p className="text-xs text-white/50 font-semibold uppercase">Action Type</p>
                         <p className="text-white mt-1 font-mono">{log.actionType}</p>
                     </div>
                     <div>
-                        <p className="text-xs text-gray-500 font-semibold uppercase">User</p>
+                        <p className="text-xs text-white/50 font-semibold uppercase">User</p>
                         <p className="text-white mt-1">
                             {log.userId?.username} ({log.userId?.role})
                         </p>
                     </div>
                     <div>
-                        <p className="text-xs text-gray-500 font-semibold uppercase">Target ID</p>
+                        <p className="text-xs text-white/50 font-semibold uppercase">Target ID</p>
                         <p className="text-white mt-1 font-mono text-sm">{log.targetId}</p>
                     </div>
                 </div>
 
                 {/* IP Address and User Agent */}
                 {(log.ipAddress || log.userAgent) && (
-                    <div className="bg-neutral-700/50 rounded-lg p-4 mb-4">
+                    <div className="bg-white/10 backdrop-blur-[15px] rounded-[1.5rem] p-4 mb-4 border border-white/20\">
                         {log.ipAddress && (
                             <div className="mb-2">
-                                <p className="text-xs text-gray-500 font-semibold uppercase">IP Address</p>
-                                <p className="text-gray-300 font-mono text-sm mt-1">{log.ipAddress}</p>
+                                <p className="text-xs text-white/50 font-semibold uppercase">IP Address</p>
+                                <p className="text-white/70 font-mono text-sm mt-1\">{log.ipAddress}</p>
                             </div>
                         )}
                         {log.userAgent && (
                             <div>
-                                <p className="text-xs text-gray-500 font-semibold uppercase">User Agent</p>
-                                <p className="text-gray-300 text-xs mt-1 break-all">{log.userAgent}</p>
+                                <p className="text-xs text-white/50 font-semibold uppercase\">User Agent</p>
+                                <p className="text-white/70 text-xs mt-1 break-all\">{log.userAgent}</p>
                             </div>
                         )}
                     </div>
