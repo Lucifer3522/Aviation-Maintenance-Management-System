@@ -1,0 +1,8 @@
+# Backend
+amm-backend/.env
+amm-backend/node_modules/
+amm-backend/package-lock.json
+
+# Frontend
+amm-frontend/node_modules/
+amm-frontend/package-lock.json
