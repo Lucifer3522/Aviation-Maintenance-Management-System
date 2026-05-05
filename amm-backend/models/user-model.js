@@ -5,7 +5,6 @@ import bcrypt from 'bcrypt';
 // Import User Schema
 import userSchema from '../schema/schema-user.js';
 
-// Password Hashing Middleware for .save()
 userSchema.pre('save', async function() {
     if (!this.isModified('password')) {
         return;
@@ -19,7 +18,6 @@ userSchema.pre('save', async function() {
     }
 });
 
-// Password Hashing Middleware for .findOneAndUpdate() as safety measure
 userSchema.pre('findOneAndUpdate', async function() {
     if (this.getUpdate().password) {
         try {
@@ -31,7 +29,6 @@ userSchema.pre('findOneAndUpdate', async function() {
     }
 });
 
-// Password Comparison Method
 userSchema.methods.comparePassword = async function(candidatePassword) {
     try {
         return await bcrypt.compare(candidatePassword, this.password);
@@ -40,7 +37,6 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
     }
 };
 
-// Create and Export User Model
 const UserModel = mongoose.model('AMM-User', userSchema);
 
 export default UserModel;

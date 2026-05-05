@@ -1,4 +1,4 @@
-// Task Controller - Handles task operations and approvals
+// Task Controller
 import Task from '../models/task-model.js';
 import logger from '../utils/logger.js';
 import {
@@ -12,10 +12,6 @@ import {
     checkBothApproved
 } from '../services/approval-service.js';
 
-/**
- * Create a new maintenance task
- * POST /api/tasks/create
- */
 export async function createTask(req, res) {
     try {
         const {
@@ -33,13 +29,11 @@ export async function createTask(req, res) {
             technicians
         } = req.body;
         
-        // Check if task number already exists
         const existingTask = await Task.findOne({ taskNumber });
         if (existingTask) {
             return res.status(400).json({ message: 'Task number already exists' });
         }
         
-        // Create new task
         const task = await Task.create({
             taskNumber,
             title,
@@ -69,10 +63,6 @@ export async function createTask(req, res) {
     }
 }
 
-/**
- * Get task by ID
- * GET /api/tasks/:taskId
- */
 export async function getTask(req, res) {
     try {
         const { taskId } = req.params;
@@ -96,10 +86,6 @@ export async function getTask(req, res) {
     }
 }
 
-/**
- * Get all tasks for an aircraft
- * GET /api/tasks/aircraft/:aircraftId
- */
 export async function getTasksByAircraft(req, res) {
     try {
         const { aircraftId } = req.params;
@@ -126,10 +112,6 @@ export async function getTasksByAircraft(req, res) {
     }
 }
 
-/**
- * Get tasks waiting for B1 approval
- * GET /api/tasks/approval/pending-b1
- */
 export async function getPendingB1Tasks(req, res) {
     try {
         const tasks = await Task.find({
@@ -154,10 +136,6 @@ export async function getPendingB1Tasks(req, res) {
     }
 }
 
-/**
- * Get tasks waiting for B2 approval
- * GET /api/tasks/approval/pending-b2
- */
 export async function getPendingB2Tasks(req, res) {
     try {
         const tasks = await Task.find({
@@ -182,10 +160,6 @@ export async function getPendingB2Tasks(req, res) {
     }
 }
 
-/**
- * Get tasks ready for CRS review
- * GET /api/tasks/approval/pending-crs
- */
 export async function getPendingCRSReview(req, res) {
     try {
         const tasks = await Task.find({
@@ -197,7 +171,6 @@ export async function getPendingCRSReview(req, res) {
             .populate('b2Approval.approvedBy', 'name email role')
             .sort({ createdAt: -1 });
         
-        // Filter by required approval type to ensure task is actually ready
         const validTasks = tasks.filter(task => {
             switch (task.requiredApprovalBy) {
                 case 'B1_ONLY':
@@ -221,10 +194,6 @@ export async function getPendingCRSReview(req, res) {
     }
 }
 
-/**
- * Get B1 tasks completed by CRS (tasks B1 has approved that CRS has now completed)
- * GET /api/tasks/approval/completed-b1
- */
 export async function getCompletedB1Tasks(req, res) {
     try {
         const tasks = await Task.find({
@@ -249,10 +218,6 @@ export async function getCompletedB1Tasks(req, res) {
     }
 }
 
-/**
- * Get B2 tasks completed by CRS (tasks B2 has approved that CRS has now completed)
- * GET /api/tasks/approval/completed-b2
- */
 export async function getCompletedB2Tasks(req, res) {
     try {
         const tasks = await Task.find({
@@ -277,16 +242,11 @@ export async function getCompletedB2Tasks(req, res) {
     }
 }
 
-/**
- * B1 Approve Task
- * POST /api/tasks/:taskId/approve-b1
- */
 export async function approvB1(req, res) {
     try {
         const { taskId } = req.params;
         const { comments } = req.body;
         
-        // Check if user has B1 role
         if (!req.user.role.includes('B1')) {
             return res.status(403).json({ message: 'Only B1 technicians can approve' });
         }
@@ -303,16 +263,11 @@ export async function approvB1(req, res) {
     }
 }
 
-/**
- * B2 Approve Task
- * POST /api/tasks/:taskId/approve-b2
- */
 export async function approveB2(req, res) {
     try {
         const { taskId } = req.params;
         const { comments } = req.body;
         
-        // Check if user has B2 role
         if (!req.user.role.includes('B2')) {
             return res.status(403).json({ message: 'Only B2 technicians can approve' });
         }
@@ -329,16 +284,11 @@ export async function approveB2(req, res) {
     }
 }
 
-/**
- * CRS Approve Task
- * POST /api/tasks/:taskId/approve-crs
- */
 export async function approvCRS(req, res) {
     try {
         const { taskId } = req.params;
         const { comments } = req.body;
         
-        // Check if user has CRS role
         if (req.user.role !== 'CRS') {
             return res.status(403).json({ message: 'Only CRS can approve' });
         }
@@ -355,10 +305,6 @@ export async function approvCRS(req, res) {
     }
 }
 
-/**
- * B1 Reject Task
- * POST /api/tasks/:taskId/reject-b1
- */
 export async function rejectB1(req, res) {
     try {
         const { taskId } = req.params;
@@ -368,7 +314,6 @@ export async function rejectB1(req, res) {
             return res.status(400).json({ message: 'Rejection reason is required' });
         }
         
-        // Check if user has B1 role
         if (!req.user.role.includes('B1')) {
             return res.status(403).json({ message: 'Only B1 technicians can reject' });
         }
@@ -385,10 +330,6 @@ export async function rejectB1(req, res) {
     }
 }
 
-/**
- * B2 Reject Task
- * POST /api/tasks/:taskId/reject-b2
- */
 export async function rejectB2(req, res) {
     try {
         const { taskId } = req.params;
@@ -398,7 +339,6 @@ export async function rejectB2(req, res) {
             return res.status(400).json({ message: 'Rejection reason is required' });
         }
         
-        // Check if user has B2 role
         if (!req.user.role.includes('B2')) {
             return res.status(403).json({ message: 'Only B2 technicians can reject' });
         }
@@ -415,10 +355,6 @@ export async function rejectB2(req, res) {
     }
 }
 
-/**
- * CRS Reject Task
- * POST /api/tasks/:taskId/reject-crs
- */
 export async function rejectCRS(req, res) {
     try {
         const { taskId } = req.params;
@@ -428,7 +364,6 @@ export async function rejectCRS(req, res) {
             return res.status(400).json({ message: 'Rejection reason is required' });
         }
         
-        // Check if user has CRS role
         if (req.user.role !== 'CRS') {
             return res.status(403).json({ message: 'Only CRS can reject' });
         }
@@ -445,10 +380,6 @@ export async function rejectCRS(req, res) {
     }
 }
 
-/**
- * Get task approval status
- * GET /api/tasks/:taskId/approval-status
- */
 export async function taskApprovalStatus(req, res) {
     try {
         const { taskId } = req.params;
@@ -462,16 +393,11 @@ export async function taskApprovalStatus(req, res) {
     }
 }
 
-/**
- * Update task details
- * PUT /api/tasks/:taskId
- */
 export async function updateTask(req, res) {
     try {
         const { taskId } = req.params;
         const updateData = req.body;
         
-        // Don't allow direct status updates through this endpoint
         delete updateData.status;
         delete updateData.b1Approval;
         delete updateData.b2Approval;
@@ -497,10 +423,6 @@ export async function updateTask(req, res) {
     }
 }
 
-/**
- * Delete task (only if still Pending)
- * DELETE /api/tasks/:taskId
- */
 export async function deleteTask(req, res) {
     try {
         const { taskId } = req.params;
@@ -526,27 +448,25 @@ export async function deleteTask(req, res) {
     }
 }
 
-/**
- * Get approval statistics for dashboard
- * GET /api/tasks/stats/approval-dashboard
- */
 export async function getApprovalStats(req, res) {
     try {
-        // Count B1 pending tasks (B1_ONLY or BOTH)
+        const allTasks = await Task.find().select('status requiredApprovalBy b1Approval b2Approval crsApproval taskNumber');
+        allTasks.forEach(t => {
+            console.log(`Task ${t.taskNumber}: status=${t.status}, required=${t.requiredApprovalBy}, b1=${t.b1Approval?.approved}, b2=${t.b2Approval?.approved}, crs=${t.crsApproval?.approved}`);
+        });
+
         const pendingB1 = await Task.countDocuments({
             status: 'Pending',
             'b1Approval.approved': false,
             requiredApprovalBy: { $in: ['B1_ONLY', 'BOTH'] }
         });
         
-        // Count B2 pending tasks (B2_ONLY or BOTH)
         const pendingB2 = await Task.countDocuments({
             status: 'Pending',
             'b2Approval.approved': false,
             requiredApprovalBy: { $in: ['B2_ONLY', 'BOTH'] }
         });
         
-        // Count CRS pending tasks (any that are Ready for CRS and not approved by CRS)
         const pendingCRS = await Task.countDocuments({
             status: 'Ready for CRS',
             'crsApproval.approved': false
@@ -555,12 +475,24 @@ export async function getApprovalStats(req, res) {
         const completed = await Task.countDocuments({ status: 'Completed' });
         const rejected = await Task.countDocuments({ status: 'Rejected' });
         
+        const statusBreakdown = {};
+        const tasksByStatus = await Task.aggregate([
+            { $group: { _id: '$status', count: { $sum: 1 } } }
+        ]);
+        tasksByStatus.forEach(item => {
+            statusBreakdown[item._id] = item.count;
+        });
+
+        console.log("Status breakdown:", statusBreakdown);
+
         res.status(200).json({
             pendingB1Approvals: pendingB1,
             pendingB2Approvals: pendingB2,
             pendingCRSReviews: pendingCRS,
             completedTasks: completed,
-            rejectedTasks: rejected
+            rejectedTasks: rejected,
+            totalTasks: allTasks.length,
+            statusBreakdown: statusBreakdown
         });
     } catch (error) {
         logger.dropError('TASK_CONTROLLER', 'Get Approval Stats Error', error);

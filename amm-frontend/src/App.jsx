@@ -23,6 +23,7 @@ import DashboardMRO from "./pages/DashboardMRO"
 import DashboardTech from "./pages/DashboardTech"
 import DashboardCRS from "./pages/DashboardCRS"
 import ViewMPTL from "./pages/ViewMPTL"
+import ViewMPL from "./pages/ViewMPL"
 
 // Application Action Pages
 import AddAircraft from "./pages/actions/AddAircraft"
@@ -104,12 +105,14 @@ function AppLayout() {
             <Route path="/camo" element={<Auth><DashboardCAMO /></Auth>} />
             <Route path="/camo/mpl/create" element={<Auth><CreateMPL /></Auth>} />
             <Route path="/camo/mpl/edit/:mplId" element={<Auth><EditMPL /></Auth>} />
+            <Route path="/camo/mpl/view/:mplId" element={<Auth><ViewMPL /></Auth>} />
             <Route path="/camo/sb/create" element={<Auth><CreateSB /></Auth>} />
 
             {/* Application MRO Pages*/}
             <Route path="/mro" element={<Auth><DashboardMRO /></Auth>} />
             <Route path="/mro/mptl/create" element={<Auth><CreateMPTL /></Auth>} />
             <Route path="/mro/mptl/edit/:mptlId" element={<Auth><EditMPTL /></Auth>} />
+            <Route path="/mro/mpl/:mplId" element={<Auth><ViewMPL /></Auth>} />
           
             {/* Application Technication Pages*/}
             <Route path="/tech" element={<Auth><DashboardTech /></Auth>} />

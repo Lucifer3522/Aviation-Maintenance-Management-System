@@ -33,7 +33,7 @@ export const authRole = (...roles) => {
     };
 };
 
-// Roles Setup
+// Roles
 export const authSuperAdmin = authRole('SUPER_ADMIN');
 export const authAdmin = authRole('SUPER_ADMIN', 'ADMIN');
 export const authCAMO = authRole('SUPER_ADMIN', 'ADMIN', 'CAMO');

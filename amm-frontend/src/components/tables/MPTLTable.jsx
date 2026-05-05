@@ -42,7 +42,7 @@ function MPTLTable({ mptls, onDelete }) {
                                     {mptl.overallStatus}
                                 </Badge>
                             </td>
-                            <td className="px-4 py-3 text-sm">
+                            <td className="px-4 py-3 text-sm text-gray-100">
                                 {new Date(mptl.createdAt).toLocaleDateString()}
                             </td>
                             <td className="px-4 py-3 text-right space-x-2 flex justify-end">

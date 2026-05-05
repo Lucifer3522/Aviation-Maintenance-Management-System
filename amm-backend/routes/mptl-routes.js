@@ -6,7 +6,7 @@ import logger from '../utils/logger.js';
 const router = express.Router();
 
 // Import Required Middleware
-import { authToken, authMRO, authTech, authCRS } from '../middleware/auth-middleware.js';
+import { authToken, authMRO, authTech, authCRS, authRole } from '../middleware/auth-middleware.js';
 import { auditLog } from '../middleware/audit-middleware.js';
 
 // Import Models
@@ -174,7 +174,7 @@ router.post("/api/post/mptList/:id/issue", authToken, authCRS, async (req, res) 
 router.put(
     "/api/put/mptList/update/:id",
     authToken,
-    authMRO,
+    authRole('SUPER_ADMIN', 'ADMIN', 'MRO', 'CRS'),
     auditLog(
         'MPTL_UPDATED',
         'params.id',

@@ -56,7 +56,6 @@ async function userLogin(req, res) {
         });
 
         if (user && (await user.comparePassword(password))) {
-            // Record successful login (reset rate limit counter)
             recordSuccessfulLogin(email);
             
             res.json({
@@ -71,7 +70,6 @@ async function userLogin(req, res) {
                 token: JWTToken(user.id, user.role, user.organization),
             });
         } else {
-            // Record failed login attempt
             recordFailedAttempt(email);
             
             res.status(401).json({ message: "Unknown Authentication" });
@@ -88,7 +86,6 @@ async function updatePassword(req, res) {
         const { userId } = req.params;
         const { currentPassword, newPassword, confirmPassword } = req.body;
 
-        // Validate input
         if (!currentPassword || !newPassword || !confirmPassword) {
             return res.status(400).json({ 
                 message: "Current password, new password, and confirmation are required" 
@@ -121,7 +118,7 @@ async function updatePassword(req, res) {
             });
         }
 
-        // Update password - this will trigger the pre-save hook
+        // Update password
         user.password = newPassword;
         await user.save();
 
@@ -136,13 +133,12 @@ async function updatePassword(req, res) {
     }
 }
 
-// Admin Update User Password (bypass current password verification)
+// Admin Update User Password 
 async function adminUpdatePassword(req, res) {
     try {
         const { userId } = req.params;
         const { newPassword, confirmPassword } = req.body;
 
-        // Validate input
         if (!newPassword || !confirmPassword) {
             return res.status(400).json({ 
                 message: "New password and confirmation are required" 
@@ -167,7 +163,7 @@ async function adminUpdatePassword(req, res) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Update password - this will trigger the pre-save hook
+        // Update password 
         user.password = newPassword;
         await user.save();
 

@@ -42,7 +42,6 @@ router.get("/api/get/users/:id", authToken, authAdmin, async (req, res) => {
 
 // ----- [ UPDATE ] ----- //
 
-// Update User (excluding password - use dedicated password endpoint instead)
 router.put(
     "/api/put/users/edit/:id",
     authToken,
@@ -56,7 +55,6 @@ router.put(
                 return res.status(404).json({ message: "User not Found"});
             }
 
-            // Handle certifications data type conversion
             if (updateData.certifications !== undefined) {
                 if (typeof updateData.certifications === 'string') {
                     updateData.certifications = updateData.certifications
@@ -66,7 +64,6 @@ router.put(
                 }
             }
 
-            // Update user fields directly (avoiding Mongoose set issues)
             if (updateData.username !== undefined) user.username = updateData.username;
             if (updateData.name !== undefined) user.name = updateData.name;
             if (updateData.email !== undefined) user.email = updateData.email;
@@ -77,7 +74,6 @@ router.put(
 
             await user.save();
 
-            // Manual audit logging (non-blocking)
             const { password: _, ...safeData } = req.body;
             AuditLogModel.create({
                 userId: req.user?.userId || req.user?.id || req.user?._id,
@@ -89,7 +85,6 @@ router.put(
                 timestamp: new Date()
             }).catch(err => logger.dropError('AUDIT', 'Failed to log user update', err.message));
 
-            // Return user without password
             const userResponse = user.toObject();
             delete userResponse.password;
 
@@ -116,7 +111,6 @@ router.delete(
             return res.status(404).json({ message: "User not Found"});
         }
 
-        // Manual audit logging (non-blocking)
         AuditLogModel.create({
             userId: req.user?.userId || req.user?.id || req.user?._id,
             actionType: 'USER_DELETED',

@@ -58,11 +58,11 @@ function AircraftGrid({ aircraft, onView, onEdit, onDelete }) {
                         </div>
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-400">Total Hours</span>
-                            <span className="text-white">{craft.totalFlightHours || 0} hrs</span>
+                            <span className="text-white">{craft.flightHours || 0} hrs</span>
                         </div>
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-400">Total Cycles</span>
-                            <span className="text-white">{craft.totalCycles || 0}</span>
+                            <span className="text-white">{craft.cycles || 0}</span>
                         </div>
                         {craft.yearOfManufacture && (
                             <div className="flex justify-between text-sm">

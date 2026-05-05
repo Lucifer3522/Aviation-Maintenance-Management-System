@@ -1,8 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Badge, Button } from "../ui";
 
 function MPLTable({ mpls, onSendToMRO, onDelete, hideActions = false, customActions }) {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const getViewRoute = (mpl) => {
+        // If on CAMO page, use CAMO view route
+        if (location.pathname.includes('/camo')) {
+            return `/camo/mpl/view/${mpl._id}`;
+        }
+        // Otherwise use MRO view route
+        return `/mro/mpl/${mpl._id}`;
+    };
 
     if (mpls.length === 0) {
         return <p className="text-gray-400 text-center py-8">No MPLs created yet</p>;
@@ -55,6 +65,13 @@ function MPLTable({ mpls, onSendToMRO, onDelete, hideActions = false, customActi
                                     customActions(mpl)
                                 ) : !hideActions ? (
                                     <>
+                                        <Button
+                                            size="sm"
+                                            variant="info"
+                                            onClick={() => navigate(getViewRoute(mpl))}
+                                        >
+                                            View
+                                        </Button>
                                         {!mpl.sentToMRO && onSendToMRO && (
                                             <Button
                                                 size="sm"

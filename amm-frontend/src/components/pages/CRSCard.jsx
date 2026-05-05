@@ -1,6 +1,6 @@
 import { Badge, Button } from "../ui";
 
-function CRSCard({ mptl, onIssueCRS, onViewDetails, onViewCertificate, status = "awaiting" }) {
+function CRSCard({ mptl, onIssueCRS, onViewDetails, onRejectCertificate, status = "awaiting" }) {
     const completedTasks = mptl.completedTasks || 0;
     const totalTasks = mptl.totalTasks || 0;
     const progressPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
@@ -89,12 +89,12 @@ function CRSCard({ mptl, onIssueCRS, onViewDetails, onViewCertificate, status = 
                             View Details
                         </Button>
                         <Button
-                            variant="secondary"
+                            variant="danger"
                             size="sm"
-                            onClick={() => onViewCertificate(mptl._id)}
+                            onClick={() => onRejectCertificate(mptl._id)}
                             className="flex-1"
                         >
-                            Print Certificate
+                            Revoke CRS
                         </Button>
                     </>
                 )}

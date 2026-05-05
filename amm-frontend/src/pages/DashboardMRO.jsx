@@ -157,7 +157,7 @@ function MRODashboard() {
                                         <Button
                                             size="sm"
                                             variant="secondary"
-                                            onClick={() => alert('MPL detail page coming soon')}
+                                            onClick={() => navigate(`/mro/mpl/${mpl._id}`)}
                                         >
                                             View MPL
                                         </Button>

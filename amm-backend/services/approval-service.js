@@ -3,9 +3,6 @@ import Task from '../models/task-model.js';
 import Aircraft from '../models/aircraft-model.js';
 import logger from '../utils/logger.js';
 
-/**
- * Check if both B1 and B2 have approved the task
- */
 export async function checkBothApproved(taskId) {
     try {
         const task = await Task.findById(taskId);
@@ -24,9 +21,6 @@ export async function checkBothApproved(taskId) {
     }
 }
 
-/**
- * Update approval status and move task to next stage based on required approvals
- */
 export async function updateTaskApprovalStatus(taskId) {
     try {
         const task = await Task.findById(taskId);
@@ -35,7 +29,6 @@ export async function updateTaskApprovalStatus(taskId) {
             throw new Error('Task not found');
         }
         
-        // Check if task is rejected by any required approver
         if (task.b1Approval.rejectionReason || task.b2Approval.rejectionReason) {
             task.status = 'Rejected';
             task.updatedAt = new Date();
@@ -43,22 +36,18 @@ export async function updateTaskApprovalStatus(taskId) {
             return task;
         }
         
-        // Determine if task is ready for CRS based on required approval type
         let readyForCRS = false;
         
         switch (task.requiredApprovalBy) {
             case 'B1_ONLY':
-                // Only B1 approval needed
                 readyForCRS = task.b1Approval.approved;
                 break;
                 
             case 'B2_ONLY':
-                // Only B2 approval needed
                 readyForCRS = task.b2Approval.approved;
                 break;
                 
             case 'BOTH':
-                // Both B1 and B2 approvals needed
                 readyForCRS = task.b1Approval.approved && task.b2Approval.approved;
                 break;
                 
@@ -66,13 +55,11 @@ export async function updateTaskApprovalStatus(taskId) {
                 readyForCRS = false;
         }
         
-        // Update approval status flags
         task.approvalStatus.b1Submitted = task.b1Approval.approved;
         task.approvalStatus.b2Submitted = task.b2Approval.approved;
         task.approvalStatus.bothApproved = task.b1Approval.approved && task.b2Approval.approved;
         task.approvalStatus.crsReady = readyForCRS;
         
-        // Update task status based on approvals
         if (readyForCRS && task.status === 'Pending') {
             task.status = 'Ready for CRS';
         }
@@ -87,9 +74,6 @@ export async function updateTaskApprovalStatus(taskId) {
     }
 }
 
-/**
- * B1 Approval - Mechanical
- */
 export async function approveTaskB1(taskId, userId, comments = '') {
     try {
         const task = await Task.findById(taskId);
@@ -102,17 +86,14 @@ export async function approveTaskB1(taskId, userId, comments = '') {
             throw new Error('Task cannot be approved at this stage');
         }
         
-        // Record B1 approval
         task.b1Approval.approved = true;
         task.b1Approval.approvedBy = userId;
         task.b1Approval.approvalDate = new Date();
         task.b1Approval.comments = comments;
-        task.b1Approval.rejectionReason = null; // Clear any previous rejection
+        task.b1Approval.rejectionReason = null; 
         
-        // Save B1 approval
         await task.save();
         
-        // Update approval status and move to next stage if ready
         const updatedTask = await updateTaskApprovalStatus(task._id);
         
         logger.dropInfo('APPROVAL_SERVICE', `B1 approved task ${taskId}`, 'Success');
@@ -123,9 +104,6 @@ export async function approveTaskB1(taskId, userId, comments = '') {
     }
 }
 
-/**
- * B2 Approval - Avionics
- */
 export async function approveTaskB2(taskId, userId, comments = '') {
     try {
         const task = await Task.findById(taskId);
@@ -138,17 +116,14 @@ export async function approveTaskB2(taskId, userId, comments = '') {
             throw new Error('Task cannot be approved at this stage');
         }
         
-        // Record B2 approval
         task.b2Approval.approved = true;
         task.b2Approval.approvedBy = userId;
         task.b2Approval.approvalDate = new Date();
         task.b2Approval.comments = comments;
         task.b2Approval.rejectionReason = null; // Clear any previous rejection
         
-        // Save B2 approval
         await task.save();
         
-        // Update approval status and move to next stage if ready
         const updatedTask = await updateTaskApprovalStatus(task._id);
         
         logger.dropInfo('APPROVAL_SERVICE', `B2 approved task ${taskId}`, 'Success');
@@ -159,9 +134,6 @@ export async function approveTaskB2(taskId, userId, comments = '') {
     }
 }
 
-/**
- * Reject task by B1
- */
 export async function rejectTaskB1(taskId, userId, rejectionReason) {
     try {
         const task = await Task.findById(taskId);
@@ -186,9 +158,6 @@ export async function rejectTaskB1(taskId, userId, rejectionReason) {
     }
 }
 
-/**
- * Reject task by B2
- */
 export async function rejectTaskB2(taskId, userId, rejectionReason) {
     try {
         const task = await Task.findById(taskId);
@@ -213,9 +182,6 @@ export async function rejectTaskB2(taskId, userId, rejectionReason) {
     }
 }
 
-/**
- * CRS Final Approval
- */
 export async function approveTaskCRS(taskId, userId, comments = '') {
     try {
         const task = await Task.findById(taskId);
@@ -228,7 +194,6 @@ export async function approveTaskCRS(taskId, userId, comments = '') {
             throw new Error('Task is not ready for CRS approval');
         }
         
-        // Check that required approvals have been met based on task type
         let requiredApprovalsComplete = false;
         switch (task.requiredApprovalBy) {
             case 'B1_ONLY':
@@ -248,7 +213,6 @@ export async function approveTaskCRS(taskId, userId, comments = '') {
             throw new Error('Required approvals have not been completed');
         }
         
-        // Record CRS approval
         task.crsApproval.approved = true;
         task.crsApproval.approvedBy = userId;
         task.crsApproval.approvalDate = new Date();
@@ -259,7 +223,6 @@ export async function approveTaskCRS(taskId, userId, comments = '') {
         
         await task.save();
         
-        // Check and update aircraft status if all tasks are completed
         await updateAircraftStatus(task.aircraftId);
         
         logger.dropInfo('APPROVAL_SERVICE', `CRS approved task ${taskId}`, 'Success');
@@ -270,9 +233,6 @@ export async function approveTaskCRS(taskId, userId, comments = '') {
     }
 }
 
-/**
- * CRS Rejection
- */
 export async function rejectTaskCRS(taskId, userId, rejectionReason) {
     try {
         const task = await Task.findById(taskId);
@@ -297,9 +257,6 @@ export async function rejectTaskCRS(taskId, userId, rejectionReason) {
     }
 }
 
-/**
- * Update Aircraft Status - Set to "Ready for Flight" when all tasks are completed
- */
 export async function updateAircraftStatus(aircraftId) {
     try {
         const aircraft = await Aircraft.findById(aircraftId);
@@ -308,14 +265,12 @@ export async function updateAircraftStatus(aircraftId) {
             throw new Error('Aircraft not found');
         }
         
-        // Find all tasks for this aircraft
         const allTasks = await Task.find({ aircraftId: aircraftId });
         const completedTasks = await Task.find({ 
             aircraftId: aircraftId, 
             status: 'Completed' 
         });
         
-        // If all tasks are completed, update aircraft status
         if (allTasks.length > 0 && allTasks.length === completedTasks.length) {
             aircraft.status = 'Ready for Flight';
             aircraft.updatedAt = new Date();
@@ -331,9 +286,6 @@ export async function updateAircraftStatus(aircraftId) {
     }
 }
 
-/**
- * Get task approval status with details
- */
 export async function getTaskApprovalStatus(taskId) {
     try {
         const task = await Task.findById(taskId)

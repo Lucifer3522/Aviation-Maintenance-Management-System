@@ -13,38 +13,22 @@ import { authToken, authSuperAdmin } from '../middleware/auth-middleware.js';
 
 // ----- [ GET ] ----- //
 
-/**
- * Get Audit Logs with Pagination
- * Protected Route: SUPER_ADMIN only
- * Query Parameters:
- *   - page: Page number (default: 1)
- *   - limit: Logs per page (default: 20, max: 100)
- *   - actionType: Filter by action type (optional)
- *   - userId: Filter by user ID (optional)
- *   - startDate: Filter logs from this date (optional, ISO 8601 format)
- *   - endDate: Filter logs until this date (optional, ISO 8601 format)
- */
 router.get('/api/admin/logs', authToken, authSuperAdmin, async (req, res) => {
     try {
-        // Extract and validate pagination parameters
         const page = Math.max(1, parseInt(req.query.page) || 1);
         const limit = Math.min(100, Math.max(1, parseInt(req.query.limit) || 20));
         const skip = (page - 1) * limit;
 
-        // Build filter object
         const filter = {};
 
-        // Filter by actionType if provided
         if (req.query.actionType) {
             filter.actionType = req.query.actionType;
         }
 
-        // Filter by userId if provided
         if (req.query.userId) {
             filter.userId = req.query.userId;
         }
 
-        // Filter by date range if provided
         if (req.query.startDate || req.query.endDate) {
             filter.timestamp = {};
             if (req.query.startDate) {
@@ -55,7 +39,6 @@ router.get('/api/admin/logs', authToken, authSuperAdmin, async (req, res) => {
             }
         }
 
-        // Execute query with pagination
         const logs = await AuditLogModel.find(filter)
             .populate('userId', 'username email role organization')
             .sort({ timestamp: -1 })
@@ -63,13 +46,10 @@ router.get('/api/admin/logs', authToken, authSuperAdmin, async (req, res) => {
             .limit(limit)
             .lean();
 
-        // Get total count for pagination metadata
         const total = await AuditLogModel.countDocuments(filter);
 
-        // Calculate total pages
         const totalPages = Math.ceil(total / limit);
 
-        // Send response with pagination metadata
         res.json({
             success: true,
             data: logs,
@@ -95,10 +75,6 @@ router.get('/api/admin/logs', authToken, authSuperAdmin, async (req, res) => {
     }
 });
 
-/**
- * Get Audit Log by ID
- * Protected Route: SUPER_ADMIN only
- */
 router.get('/api/admin/logs/:id', authToken, authSuperAdmin, async (req, res) => {
     try {
         const log = await AuditLogModel.findById(req.params.id)
@@ -126,14 +102,8 @@ router.get('/api/admin/logs/:id', authToken, authSuperAdmin, async (req, res) =>
     }
 });
 
-/**
- * Get Audit Statistics
- * Protected Route: SUPER_ADMIN only
- * Returns summary of audit activities
- */
 router.get('/api/admin/logs/stats/summary', authToken, authSuperAdmin, async (req, res) => {
     try {
-        // Get action type statistics
         const actionStats = await AuditLogModel.aggregate([
             {
                 $group: {
@@ -146,7 +116,6 @@ router.get('/api/admin/logs/stats/summary', authToken, authSuperAdmin, async (re
             }
         ]);
 
-        // Get user activity statistics
         const userStats = await AuditLogModel.aggregate([
             {
                 $group: {
@@ -180,10 +149,8 @@ router.get('/api/admin/logs/stats/summary', authToken, authSuperAdmin, async (re
             }
         ]);
 
-        // Get total logs count
         const totalLogs = await AuditLogModel.countDocuments();
 
-        // Get logs from last 7 days
         const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
         const logsLast7Days = await AuditLogModel.countDocuments({
             timestamp: { $gte: sevenDaysAgo }
@@ -211,11 +178,6 @@ router.get('/api/admin/logs/stats/summary', authToken, authSuperAdmin, async (re
 
 // ----- [ DELETE ] ----- //
 
-/**
- * Delete Audit Log by ID
- * Protected Route: SUPER_ADMIN only
- * Use with caution - typically logs should not be deleted manually
- */
 router.delete('/api/admin/logs/:id', authToken, authSuperAdmin, async (req, res) => {
     try {
         const log = await AuditLogModel.findByIdAndDelete(req.params.id);

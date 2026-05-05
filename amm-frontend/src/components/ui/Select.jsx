@@ -25,18 +25,22 @@ function Select({
                 onChange={onChange}
                 required={required}
                 disabled={disabled}
-                className="w-full px-5 py-3 bg-white/10 backdrop-blur-[20px] border border-white/20 rounded-[1.5rem] text-white focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-white/40 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg"
+                className="w-full px-5 py-3 bg-slate-700/40 backdrop-blur-[20px] border border-white/20 rounded-[1.5rem] text-white focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-white/40 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg"
+                style={{
+                    colorScheme: 'dark'
+                }}
                 {...props}
             >
                 {children ? (
                     children
                 ) : (
                     <>
-                        {placeholder && <option value="">{placeholder}</option>}
+                        {placeholder && <option value="" className="bg-slate-800 text-white">{placeholder}</option>}
                         {options.map((option, index) => (
                             <option 
                                 key={option.value || index} 
                                 value={option.value}
+                                className="bg-slate-800 text-white"
                             >
                                 {option.label}
                             </option>

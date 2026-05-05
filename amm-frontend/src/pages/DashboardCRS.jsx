@@ -29,12 +29,13 @@ function CRSDashboard() {
                 taskService.getPendingCRSReview(),
                 taskService.getApprovalStats()
             ]);
+            
             setMptls(mptlData);
             setPendingTasks(tasksData.tasks || []);
             setTaskStats(statsData);
             setLoading(false);
         } catch (error) {
-            console.error("Error fetching data:", error);
+            console.error("Error fetching CRS Dashboard data:", error);
             setLoading(false);
         }
     };
@@ -43,18 +44,40 @@ function CRSDashboard() {
         const crsNumber = prompt("Enter CRS Certificate Number:");
         if (!crsNumber) return;
 
-        const crsNotes = prompt("Enter CRS Notes (optional):");
+        if (!confirm(`Are you sure you want to issue CRS ${crsNumber}?`)) return;
 
         try {
-            await mptlService.issueCRS(mptlId, {
-                crsNumber,
-                crsNotes: crsNotes || ''
+            await mptlService.updateMPTL(mptlId, {
+                crsIssued: true,
+                crsNumber: crsNumber,
+                crsIssuedDate: new Date()
             });
-            alert("Certificate of Release to Service issued successfully!");
+            alert("CRS Certificate issued successfully!");
             fetchData();
         } catch (error) {
-            console.error("Error issuing CRS:", error);
-            alert(error.message || "Failed to issue CRS");
+            console.error("Error issuing certificate:", error);
+            alert(error.message || "Failed to issue certificate");
+        }
+    };
+
+    const handleRejectCertificate = async (mptlId, crsNumber) => {
+        const rejectionReason = prompt("Enter reason for revoking CRS certificate:");
+        if (!rejectionReason) return;
+
+        if (!confirm(`Are you sure you want to revoke CRS ${crsNumber}?`)) return;
+
+        try {
+            await mptlService.updateMPTL(mptlId, {
+                crsIssued: false,
+                crsNumber: null,
+                crsRevokedDate: new Date(),
+                crsRevocationReason: rejectionReason
+            });
+            alert("CRS Certificate revoked successfully!");
+            fetchData();
+        } catch (error) {
+            console.error("Error revoking certificate:", error);
+            alert(error.message || "Failed to revoke certificate");
         }
     };
 
@@ -110,8 +133,10 @@ function CRSDashboard() {
                 subtitle="Certificate of Release to Service - Quality Control"
             />
 
-            {/* Task Approval Stats */}
-            {taskStats && (
+            {/* Task Approval Stats 
+            
+            {taskStats ? (
+               
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
                     <StatCard 
                         title="B1 Pending"
@@ -164,7 +189,11 @@ function CRSDashboard() {
                         color="red"
                     />
                 </div>
-            )}
+            ) : (
+                <div className="bg-neutral-800 rounded-xl p-6 mb-6 border border-neutral-600">
+                    <p className="text-neutral-400 text-center">Loading task statistics...</p>
+                </div>
+            )}*/}
 
             {/* Task Approvals Section */}
             {pendingTasks.length > 0 && (
@@ -334,7 +363,7 @@ function CRSDashboard() {
                                     key={mptl._id}
                                     mptl={mptl}
                                     onViewDetails={(id) => navigate(`/crs/mptl/${id}`)}
-                                    onViewCertificate={(id) => navigate(`/crs/certificate/${id}`)}
+                                    onRejectCertificate={() => handleRejectCertificate(mptl._id, mptl.crsNumber)}
                                     status="issued"
                                 />
                             ))}

@@ -21,7 +21,7 @@ function Header({ sidebarOpen, toggleSidebar }) {
 
     return (
         <header className="bg-white/10 backdrop-blur-[20px] fixed top-0 left-0 w-full h-[75px] z-50 border-b border-white/20 shadow-lg mt-0 ml-0 rounded-none">
-            <nav aria-label="Global" className="h-full mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-10">
+            <nav aria-label="Global" className="h-full mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-10 gap-4">
                 {isLoggedIn && (
                     <button
                         onClick={toggleSidebar}
