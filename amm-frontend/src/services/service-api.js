@@ -21,8 +21,17 @@ export const apiService = async (endpoint, options = {}) => {
         });
 
             if (!res.ok) {
-                let errorMessage = `HTTP ${res.status} | ${res.statusText}`;
-                throw new Error(errorMessage || "API Call Failed");
+                let errorData = {};
+                try {
+                    errorData = await res.json();
+                } catch (e) {
+                    errorData = { message: `HTTP ${res.status} | ${res.statusText}` };
+                }
+                
+                const error = new Error(errorData.message || `HTTP ${res.status} | ${res.statusText}`);
+                error.status = res.status;
+                error.retryAfter = errorData.retryAfter;
+                throw error;
             }
 
             try {

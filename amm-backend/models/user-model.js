@@ -5,18 +5,29 @@ import bcrypt from 'bcrypt';
 // Import User Schema
 import userSchema from '../schema/schema-user.js';
 
-// Password Hashing Middleware
-userSchema.pre('save', async function(next) {
+// Password Hashing Middleware for .save()
+userSchema.pre('save', async function() {
     if (!this.isModified('password')) {
-        return next();
+        return;
     }
 
     try {
         const salt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS) || 10);
         this.password = await bcrypt.hash(this.password, salt);
-        next();
     } catch (error) {
-        next(error);
+        throw error;
+    }
+});
+
+// Password Hashing Middleware for .findOneAndUpdate() as safety measure
+userSchema.pre('findOneAndUpdate', async function() {
+    if (this.getUpdate().password) {
+        try {
+            const salt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS) || 10);
+            this.getUpdate().password = await bcrypt.hash(this.getUpdate().password, salt);
+        } catch (error) {
+            throw error;
+        }
     }
 });
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services";
 import { LoginForm } from "../components/pages";
@@ -6,10 +6,31 @@ import "../styles/glassmorphism.css";
 
 function Login() {
     const [error, setError] = useState(null);
+    const [rateLimitCountdown, setRateLimitCountdown] = useState(0);
+    const [isDisabled, setIsDisabled] = useState(false);
     const navigate = useNavigate();
+
+    // Countdown timer for rate limiting
+    useEffect(() => {
+        if (rateLimitCountdown <= 0) {
+            setIsDisabled(false);
+            return;
+        }
+
+        const timer = setTimeout(() => {
+            setRateLimitCountdown(rateLimitCountdown - 1);
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, [rateLimitCountdown]);
 
     const handleSubmit = async ({ email, password }) => {
         setError(null);
+
+        if (isDisabled) {
+            setError(`Too many login attempts. Please wait ${rateLimitCountdown} seconds before trying again.`);
+            return;
+        }
 
         try {
             const data = await authService.userLogin({ email, password });
@@ -34,7 +55,14 @@ function Login() {
                 throw new Error("Token Not Provided");
             }
         } catch (err) {
-            setError(err.message || "Unsuccessful login");
+            // Handle rate limit error (429)
+            if (err.status === 429 && err.retryAfter) {
+                setRateLimitCountdown(err.retryAfter);
+                setIsDisabled(true);
+                setError(`Too many login attempts. Please try again in ${err.retryAfter} seconds.`);
+            } else {
+                setError(err.message || "Unsuccessful login");
+            }
             console.error("Login Error:", err);
         }
     };
@@ -52,7 +80,12 @@ function Login() {
             <div className="relative z-10 flex items-center justify-center h-full w-full px-4">
                 <div className="w-full max-w-md">                    
                     <div className="space-y-6">
-                        <LoginForm onSubmit={handleSubmit} error={error} />
+                        <LoginForm 
+                            onSubmit={handleSubmit} 
+                            error={error}
+                            isDisabled={isDisabled}
+                            rateLimitCountdown={rateLimitCountdown}
+                        />
                     </div>
                 </div>
             </div>

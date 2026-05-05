@@ -32,9 +32,22 @@ function UserManagement() {
     const handleSaveUser = async (formData) => {
         try {
             if (editingUser) {
-                // Update existing user
-                await userService.updateUser(editingUser._id, formData);
-                alert('User updated successfully!');
+                // Check if password is being changed
+                const { password, ...userData } = formData;
+                
+                // Update user data (excluding password)
+                await userService.updateUser(editingUser._id, userData);
+                
+                // If password is provided, update it through the admin endpoint
+                if (password && password.trim()) {
+                    await userService.adminUpdatePassword(editingUser._id, {
+                        newPassword: password,
+                        confirmPassword: password
+                    });
+                    alert('User updated and password changed successfully!');
+                } else {
+                    alert('User updated successfully!');
+                }
             } else {
                 // Create new user through auth service
                 await authService.userRegister(formData);

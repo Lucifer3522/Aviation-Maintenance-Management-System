@@ -23,6 +23,13 @@ export const userService = {
         });
     },
 
+    adminUpdatePassword: async (id, data) => {
+        return await apiService(`/api/auth/admin/update-password/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(data)
+        });
+    },
+
     deleteUser: async (id) => {
         return await apiService(`/api/users/delete/${id}`, {
             method: 'DELETE'

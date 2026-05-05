@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input, Button, Card } from '../ui';
 
-function LoginForm({ onSubmit, error }) {
+function LoginForm({ onSubmit, error, isDisabled, rateLimitCountdown }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -20,6 +20,7 @@ function LoginForm({ onSubmit, error }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                disabled={isDisabled}
                 className="mb-3"
             />
 
@@ -29,19 +30,28 @@ function LoginForm({ onSubmit, error }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                disabled={isDisabled}
                 className="mb-3"
             />
 
             {error && (
-                <p className="text-red-600 dark:text-red-400 text-sm mb-3 text-center">{error}</p>
+                <div className="mb-3 p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
+                    <p className="text-red-300 text-sm text-center font-medium">{error}</p>
+                    {isDisabled && rateLimitCountdown > 0 && (
+                        <p className="text-red-200 text-xs text-center mt-2">
+                            Retry available in {rateLimitCountdown}s
+                        </p>
+                    )}
+                </div>
             )}
 
             <Button
                 type="submit"
                 variant="secondary"
                 className="w-full"
+                disabled={isDisabled}
             >
-                Login
+                {isDisabled ? `Wait ${rateLimitCountdown}s` : "Login"}
             </Button>
         </form>
     );
